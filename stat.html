@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝可梦种族值展示框</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff; /* 修改为白色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .pokemon-stats {
+            width: 300px;
+            background: #f8f8f8;
+            border: 5px solid #000;
+            border-radius: 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+        
+        .stats-title {
+            text-align: center;
+            color: #3a5da8;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+        
+        .stat-name {
+            width: 80px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-input {
+            width: 40px;
+            text-align: right;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            padding: 3px;
+            border-radius: 4px;
+        }
+        
+        .stat-bar {
+            flex-grow: 1;
+            height: 15px;
+            background-color: #e0e0e0;
+            border-radius: 7px;
+            overflow: hidden;
+        }
+        
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 7px;
+        }
+        
+        .total {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+            border-top: 2px dashed #aaa;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pokemon-stats">
+        <div class="stats-title">种族值</div>
+        
+        <div class="stat-row">
+            <div class="stat-name">HP</div>
+            <input type="number" class="stat-input" value="103" min="0" max="255">
+            <div class="stat-bar">
+                <div class="stat-bar-fill"></div>
+            </div>
+        </div>
+        
+        <div class="stat-row">
+            <div class="stat-name">攻击</div>
+            <input type="number" class="stat-input" value="130" min="0" max="255">
+            <div class="stat-bar">
+                <div class="stat-bar-fill"></div>
+            </div>
+        </div>
+        
+        <div class="stat-row">
+            <div class="stat-name">防御</div>
+            <input type="number" class="stat-input" value="117" min="0" max="255">
+            <div class="stat-bar">
+                <div class="stat-bar-fill"></div>
+            </div>
+        </div>
+        
+        <div class="stat-row">
+            <div class="stat-name">特攻</div>
+            <input type="number" class="stat-input" value="45" min="0" max="255">
+            <div class="stat-bar">
+                <div class="stat-bar-fill"></div>
+            </div>
+        </div>
+        
+        <div class="stat-row">
+            <div class="stat-name">特防</div>
+            <input type="number" class="stat-input" value="55" min="0" max="255">
+            <div class="stat-bar">
+                <div class="stat-bar-fill"></div>
+            </div>
+        </div>
+        
+        <div class="stat-row">
+            <div class="stat-name">速度</div>
+            <input type="number" class="stat-input" value="75" min="0" max="255">
+            <div class="stat-bar">
+                <div class="stat-bar-fill"></div>
+            </div>
+        </div>
+        
+        <div class="total">种族值总和: <span id="total-value">526</span></div>
+    </div>
+    <script>
+        // 获取所有输入框和进度条
+        const statInputs = document.querySelectorAll('.stat-input');
+        const statBars = document.querySelectorAll('.stat-bar-fill');
+        const totalValue = document.getElementById('total-value');
+
+        // 更新函数
+        function updateStats() {
+            let total = 0;
+            statInputs.forEach((input, index) => {
+                const value = parseInt(input.value) || 0;
+                total += value;
+
+                // 计算百分比 (种族值最大值通常为255)
+                const percentage = Math.min((value / 255) * 100, 100);
+                statBars[index].style.width = `${percentage}%`;
+
+                // 设置颜色 (大于100红色，小于100蓝色)
+                statBars[index].style.backgroundColor = value > 100 ? 'rgb(255, 80, 80)' : 'rgb(100, 150, 255)';
+            });
+            totalValue.textContent = total;
+        }
+
+        // 为所有输入框添加事件监听
+        statInputs.forEach(input => {
+            input.addEventListener('input', updateStats);
+        });
+
+        // 初始化页面
+        updateStats();
+    </script>
+</body>
+</html>

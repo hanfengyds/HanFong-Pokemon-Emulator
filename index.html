@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝可梦BP对战系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- TogetherJS 配置 -->
+    <script>
+        var TogetherJSConfig = {
+            siteName: "宝可梦BP对战",
+            showFooter: false,
+            enableWebRTC: true
+        };
+    </script>
+    <!-- 引入 TogetherJS -->
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>宝可梦BP对战系统</h1>
+            <p>由bilibili作者@韩枫有点帅开发，模拟宝可梦BP对战系统</p>
+        </div>
+        
+        <div class="bp-phase-indicator">
+            <i class="fas fa-flag phase-icon red-phase"></i>
+            <span id="phase-text">红方禁用阶段 (剩余: 3)</span>
+            <i class="fas fa-flag phase-icon blue-phase"></i>
+        </div>
+        
+        <div class="main-content">
+            <!-- 红队区域 -->
+            <div class="team-section red-team" id="red-team-section">
+                <div class="team-title red-title">红队 (先手)</div>
+                <div class="team-list" id="red-team-list">
+                    <div class="empty-message">暂无选择的宝可梦</div>
+                </div>
+                <div class="banned-list">
+                    <div class="team-title banned-title">红队禁用</div>
+                    <div id="red-banned-list">
+                        <div class="empty-message">暂无禁用的宝可梦</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 宝可梦池区域 -->
+            <div class="pool-section">
+                <div class="search-filter">
+                    <div class="search-box-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-box" id="search-box" placeholder="搜索宝可梦名称或编号...">
+                    </div>
+                    <div class="filter-options">
+                        <select id="generation-filter" class="filter-select">
+                            <option value="all">全部世代</option>
+                            <option value="1">第一世代 (1-151)</option>
+                            <option value="2">第二世代 (152-251)</option>
+                            <option value="3">第三世代 (252-386)</option>
+                            <option value="4">第四世代 (387-493)</option>
+                            <option value="5">第五世代 (494-649)</option>
+                            <option value="6">第六世代 (650-721)</option>
+                            <option value="7">第七世代 (722-809)</option>
+                            <option value="8">第八世代 (810-905)</option>
+                            <option value="9">第九世代 (906-1010)</option>
+                        </select>
+                        <select id="type-filter" class="filter-select">
+                            <option value="all">全部属性</option>
+                            <option value="normal">一般</option>
+                            <option value="fire">火</option>
+                            <option value="water">水</option>
+                            <option value="electric">电</option>
+                            <option value="grass">草</option>
+                            <option value="ice">冰</option>
+                            <option value="fighting">格斗</option>
+                            <option value="poison">毒</option>
+                            <option value="ground">地面</option>
+                            <option value="flying">飞行</option>
+                            <option value="psychic">超能力</option>
+                            <option value="bug">虫</option>
+                            <option value="rock">岩石</option>
+                            <option value="ghost">幽灵</option>
+                            <option value="dragon">龙</option>
+                            <option value="dark">恶</option>
+                            <option value="steel">钢</option>
+                            <option value="fairy">妖精</option>
+                        </select>
+                        <select id="tier-filter" class="filter-select">
+                            <option value="all">全国图鉴</option>
+                            <option value="uber">【Gen9】Uber</option>
+                            <option value="ou">【Gen9】OverUsed</option>
+                            <option value="uubl">【Gen9】UUBL </option>
+                            <option value="uu">【Gen9】UnderUsed</option>
+                            <option value="自定义">自定义</option>
+                        </select>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="id">按编号排序</option>
+                            <option value="name">按名称排序</option>
+                            <option value="weight">按重量排序</option>
+                            <option value="height">按高度排序</option>
+                        </select>
+                    </div>
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+                
+                <div class="pool-container">
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <span>正在加载宝可梦数据...</span>
+                    </div>
+                    <div class="pokemon-grid" id="pokemon-grid"></div>
+                </div>
+                
+                <div class="controls">
+                    <button class="control-btn" id="reset-btn">
+                        <i class="fas fa-undo"></i> 重置BP
+                    </button>
+                    <button class="control-btn" id="random-btn">
+                        <i class="fas fa-random"></i> 随机选择
+                    </button>
+                    <button class="control-btn" id="suggest-btn">
+                        <i class="fas fa-lightbulb"></i> 队伍建议
+                    </button>
+                    <button class="control-btn" id="export-btn">
+                        <i class="fas fa-file-export"></i> 双方队伍
+                    </button>
+                    <button class="control-btn" id="import-btn">
+                        <i class="fas fa-file-import"></i> 数据导出
+                    </button>
+                    <!-- 新增的实时协作按钮 -->
+                    <button class="control-btn" id="collaborate-btn" onclick="TogetherJS(this); return false;">
+                        <i class="fas fa-users"></i> 多人联机
+                    </button>
+                    <button class="control-btn" id="red-team-toggle" style="background-color: var(--red-team-color);">
+                        <i class="fas fa-chevron-right"></i> 红队面板
+                    </button>
+                    <button class="control-btn" id="blue-team-toggle" style="background-color: var(--blue-team-color);">
+                        <i class="fas fa-chevron-left"></i> 蓝队面板
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 蓝队区域 -->
+            <div class="team-section blue-team" id="blue-team-section">
+                <div class="team-title blue-title">蓝队 (后手)</div>
+                <div class="team-list" id="blue-team-list">
+                    <div class="empty-message">暂无选择的宝可梦</div>
+                </div>
+                <div class="banned-list">
+                    <div class="team-title banned-title">蓝队禁用</div>
+                    <div id="blue-banned-list">
+                        <div class="empty-message">暂无禁用的宝可梦</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 宝可梦详情弹窗 -->
+    <div class="pokemon-details" id="pokemon-details">
+        <span class="close-details">&times;</span>
+        <div class="detail-header">
+            <img id="detail-image" class="detail-image" src="" alt="">
+            <div class="detail-name-id">
+                <h2 id="detail-name" class="detail-name">皮卡丘</h2>
+                <div id="detail-id" class="detail-id">#025</div>
+                <div class="detail-types" id="detail-types"></div>
+            </div>
+        </div>
+        
+        <div class="detail-stats">
+            <h3>种族值</h3>
+            <div class="stat-row">
+                <div class="stat-name">HP</div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar" id="stat-hp"></div>
+                </div>
+                <div class="stat-value" id="stat-hp-value">0</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-name">攻击</div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar" id="stat-attack"></div>
+                </div>
+                <div class="stat-value" id="stat-attack-value">0</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-name">防御</div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar" id="stat-defense"></div>
+                </div>
+                <div class="stat-value" id="stat-defense-value">0</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-name">特攻</div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar" id="stat-special-attack"></div>
+                </div>
+                <div class="stat-value" id="stat-special-attack-value">0</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-name">特防</div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar" id="stat-special-defense"></div>
+                </div>
+                <div class="stat-value" id="stat-special-defense-value">0</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-name">速度</div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar" id="stat-speed"></div>
+                </div>
+                <div class="stat-value" id="stat-speed-value">0</div>
+            </div>
+        </div>
+        
+        <div class="detail-abilities">
+            <h3>特性</h3>
+            <div id="detail-abilities"></div>
+        </div>
+        
+        <div class="detail-physical">
+            <h3>物理特征</h3>
+            <div>身高: <span id="detail-height">0</span> m</div>
+            <div>体重: <span id="detail-weight">0</span> kg</div>
+        </div>
+    </div>
+    
+    <!-- 导入配置弹窗 -->
+    <div class="pokemon-details" id="import-modal">
+        <span class="close-details">&times;</span>
+        <h2>导入BP配置</h2>
+        <textarea id="import-data" rows="10" style="width: 100%; margin: 15px 0;" placeholder="粘贴导出的配置JSON数据..."></textarea>
+        <button class="control-btn" id="confirm-import" style="width: 100%;">
+            <i class="fas fa-check"></i> 确认导入
+        </button>
+    </div>
+    
+    <!-- 队伍建议弹窗 -->
+    <div class="pokemon-details" id="suggestion-modal">
+        <span class="close-details">&times;</span>
+        <h2>队伍建议</h2>
+        <div id="suggestion-content">
+            <p>根据当前队伍和禁用情况，以下宝可梦可能是不错的选择:</p>
+            <div id="suggested-pokemon" class="pokemon-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- 公告浮窗 -->
+    <div class="announcement-modal" id="announcement-modal">
+        <div class="announcement-header">
+            <h3>公告</h3>
+            <span class="close-announcement">&times;</span>
+        </div>
+        <div class="announcement-content">
+            <img src="gonggao/diyi.jpg" alt="公告图片">
+        </div>
+    </div>
+
+    <script src="tier.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // 公告浮窗关闭功能
+        document.querySelector('.close-announcement').addEventListener('click', function() {
+            document.getElementById('announcement-modal').style.display = 'none';
+        });
+        
+        // 默认显示公告浮窗
+        window.addEventListener('load', function() {
+            document.getElementById('announcement-modal').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,848 @@
+:root {
+            --red-team-color: #e74c3c;
+            --blue-team-color: #3498db;
+            --ban-color: #7f8c8d;
+            --hover-color: #f1c40f;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, var(--red-team-color), var(--blue-team-color));
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            display: flex;     
+        }
+        
+        /* 队伍区域 */
+        .team-section {
+            width: 220px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            z-index: 5;
+        }
+        
+        .red-team {
+            border-right: 4px solid var(--red-team-color);
+        }
+        
+        .blue-team {
+            border-left: 4px solid var(--blue-team-color);
+        }
+        
+        /* 宝可梦池区域 */
+        .pool-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: #ecf0f1;
+        }
+        
+        .pool-container {
+    height: 70vh; /* 固定高度为视窗的70% */
+    overflow-y: auto; /* 内部垂直滚动 */
+    padding: 15px;
+    background-color: #ecf0f1;
+    /* 移除 flex: 1 */
+}
+        
+        /* 宝可梦网格 */
+        .pokemon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            padding: 5px;
+        }
+        
+        .pokemon-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pokemon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .pokemon-card:hover .pokemon-name {
+            color: var(--hover-color);
+        }
+        
+        .pokemon-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .pokemon-card:hover .pokemon-image {
+            transform: scale(1.1);
+        }
+        
+        .pokemon-name {
+            margin-top: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            transition: color 0.3s;
+        }
+        
+        .pokemon-id {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            background-color: rgba(255,255,255,0.7);
+            padding: 2px 5px;
+            border-radius: 10px;
+        }
+        
+        .pokemon-types {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        
+        .type-badge {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: white;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+        
+        /* 选中和禁用状态 */
+        .pokemon-card.selected-red {
+            background-color: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--red-team-color);
+        }
+        
+        .pokemon-card.selected-blue {
+            background-color: rgba(52, 152, 219, 0.1);
+            border: 2px solid var(--blue-team-color);
+        }
+        
+        .pokemon-card.banned {
+            background-color: #ecf0f1;
+            opacity: 0.5;
+        }
+        
+        .pokemon-card.banned::after {
+            content: "✗";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: var(--ban-color);
+            opacity: 0.8;
+            z-index: 2;
+        }
+        
+        /* 控制栏 */
+        .controls {
+            padding: 10px 20px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .control-btn:hover {
+            background-color: #3d566e;
+            transform: translateY(-2px);
+        }
+        
+        .control-btn i {
+            font-size: 0.9rem;
+        }
+        
+        /* 队伍列表 */
+        .team-list {
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 10px;
+            padding-right: 5px;
+        }
+        
+        .team-title {
+            font-weight: bold;
+            text-align: center;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .red-title {
+            background-color: var(--red-team-color);
+            color: white;
+        }
+        
+        .blue-title {
+            background-color: var(--blue-team-color);
+            color: white;
+        }
+        
+        .team-pokemon {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .team-pokemon:hover {
+            transform: translateX(3px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .red-team-pokemon {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 3px solid var(--red-team-color);
+        }
+        
+        .blue-team-pokemon {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 3px solid var(--blue-team-color);
+        }
+        
+        .team-pokemon img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        
+        .team-pokemon-info {
+            flex: 1;
+        }
+        
+        .team-pokemon-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .team-pokemon-types {
+            display: flex;
+            gap: 5px;
+            margin-top: 3px;
+        }
+        
+        .team-pokemon-type {
+            font-size: 0.7rem;
+            padding: 1px 6px;
+            border-radius: 8px;
+            color: white;
+        }
+        
+        /* 禁用列表 */
+        .banned-list {
+            margin-top: 15px;
+        }
+        
+        .banned-title {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .banned-pokemon {
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            margin-bottom: 5px;
+            background-color: rgba(149, 165, 166, 0.1);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .banned-pokemon img {
+            width: 25px;
+            height: 25px;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+        
+        /* 搜索和筛选 */
+        .search-filter {
+            padding: 15px;
+            background-color: #bdc3c7;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+        
+        .search-box-container {
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .filter-options {
+            display: flex;
+            margin-top: 10px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        
+        /* BP阶段指示器 */
+        .bp-phase-indicator {
+            background-color: #34495e;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .phase-icon {
+            font-size: 1.2rem;
+        }
+        
+        .red-phase {
+            color: var(--red-team-color);
+        }
+        
+        .blue-phase {
+            color: var(--blue-team-color);
+        }
+        
+        /* 宝可梦详情弹窗 */
+        .pokemon-details {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.4);
+            z-index: 1000;
+            max-width: 90%;
+            width: 400px;
+            display: none;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .pokemon-details.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        
+        .close-details {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #7f8c8d;
+            transition: color 0.2s;
+        }
+        
+        .close-details:hover {
+            color: var(--red-team-color);
+        }
+        
+        .detail-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .detail-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-right: 20px;
+        }
+        
+        .detail-name-id {
+            flex: 1;
+        }
+        
+        .detail-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .detail-id {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin: 5px 0;
+        }
+        
+        .detail-types {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .detail-stats {
+            margin-top: 20px;
+        }
+        
+        .stat-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .stat-name {
+            width: 80px;
+            font-weight: 600;
+        }
+        
+        .stat-bar-container {
+            flex: 1;
+            height: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .stat-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+        
+        .stat-value {
+            width: 40px;
+            text-align: right;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
+        .detail-abilities {
+            margin-top: 20px;
+        }
+        
+        .ability {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 15px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* 加载动画 */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 1.5rem;
+            color: #7f8c8d;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .team-section {
+                width: 180px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .team-section {
+                position: absolute;
+                height: 100%;
+                transform: translateX(-100%);
+            }
+            
+            .team-section.active {
+                transform: translateX(0);
+                box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            }
+            
+            .red-team {
+                left: 0;
+            }
+            
+            .blue-team {
+                right: 0;
+                transform: translateX(100%);
+            }
+            
+            .team-toggle {
+                display: block;
+                position: fixed;
+                top: 100px;
+                z-index: 20;
+                background-color: white;
+                border: none;
+                width: 30px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                border-radius: 0 5px 5px 0;
+            }
+            
+            .red-team-toggle {
+                left: 0;
+            }
+            
+            .blue-team-toggle {
+                right: 0;
+                border-radius: 5px 0 0 5px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .pokemon-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            .pokemon-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        /* 进度条 */
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        /* 联机控制样式 */
+.online-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 团队指示器 */
+#team-indicator {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  margin-left: 10px;
+}
+
+.team-red {
+  background-color: var(--red-team-color);
+}
+
+.team-blue {
+  background-color: var(--blue-team-color);
+}
+
+/* 特性提示框样式 */
+.ability-tooltip {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    max-width: 300px;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    pointer-events: none;
+    line-height: 1.4;
+}
+
+/* 为特性文本添加悬停光标提示 */
+.ability {
+    cursor: help;
+    position: relative;
+}
+
+/* 在文件末尾添加以下样式 */
+.export-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.export-window-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.vs {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+.red-team, .blue-team {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 800px;
+}
+
+.simple-pokemon {
+    text-align: center;
+    flex: 0 0 auto;
+}
+
+.simple-pokemon img {
+    width: 80px; height: 80px; object-fit: contain;
+}
+
+/* 公告浮窗样式 */
+.announcement-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    z-index: 2000; /* 确保在其他弹窗之上 */
+    width: 200%;
+    max-width: 1000px;
+    max-height:1800px;
+    overflow: hidden;
+}
+
+.announcement-header {
+    background-color: #8f00b6;
+    color: rgb(255, 255, 255);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.announcement-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.close-announcement {
+    cursor: pointer;
+    font-size: 20px;
+    transition: color 0.2s;
+}
+
+.close-announcement:hover {
+    color: #33ff00;
+}
+
+.announcement-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.announcement-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
