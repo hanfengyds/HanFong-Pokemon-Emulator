@@ -265,7 +265,7 @@ class UsernameManager {
             
             #confirm-username {
                 padding: 10px 20px;
-                background-color: #3498db;
+                background-color:rgb(120, 120, 120);
                 color: white;
                 border: none;
                 border-radius: 6px;
@@ -275,18 +275,19 @@ class UsernameManager {
             }
             
             #confirm-username:hover {
-                background-color: #2980b9;
+                background-color:rgb(60, 62, 62);
             }
             
             .change-username-btn {
-                margin-left: 8px;
+    
+                order: -1;
                 cursor: pointer;
-                color: #bdc3c7;
+                color:rgb(224, 224, 224);
                 transition: color 0.2s;
             }
             
             .change-username-btn:hover {
-                color: #7f8c8d;
+                color:rgb(119, 123, 124);
             }
         `;
         document.head.appendChild(style);
