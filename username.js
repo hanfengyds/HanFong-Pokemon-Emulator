@@ -38,7 +38,7 @@ class UsernameManager {
             <div class="modal-overlay" id="username-modal">
                 <div class="modal-content">
                     <h2>设置个人信息</h2>
-                    <p>选择头像并设置用户名</p>
+                    <p>选择头像并输入用户名</p>
                     
                     <div class="avatar-selection">
                         <div class="current-avatar">
@@ -91,9 +91,11 @@ class UsernameManager {
     loadAvatars() {
         const avatarGrid = document.getElementById('avatar-grid');
         avatarGrid.innerHTML = ''; // 清空现有内容
+
+        // 指定特定的头像编号数组
+        const availableAvatars = [4,36,25,79, 94,143,212,430,722,959,259,778];
         
-        // 假设有12个头像可选（1-12.png）
-        for (let i = 100; i <= 120; i++) {
+        availableAvatars.forEach(i => {
             const avatarItem = document.createElement('div');
             avatarItem.className = 'avatar-item';
             if (i.toString() === this.avatar) {
@@ -116,7 +118,7 @@ class UsernameManager {
             });
             
             avatarGrid.appendChild(avatarItem);
-        }
+        });
     }
     
     addModalStyles() {
