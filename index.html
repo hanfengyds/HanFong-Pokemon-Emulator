@@ -6,30 +6,34 @@
     <title>宝可梦BP对战系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <!-- TogetherJS 配置 -->
-    <script>
-        var TogetherJSConfig = {
-            siteName: "宝可梦BP对战",
-            showFooter: false,
-            enableWebRTC: true
-        };
-    </script>
-    <!-- 引入 TogetherJS -->
-    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+    <!-- 添加Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
 </head>
 <body>
+    <!-- 原有所有HTML内容保持不变 -->
     <div class="container">
+        <!-- 头部区域 -->
         <div class="header">
             <h1>宝可梦BP对战系统</h1>
             <p>由bilibili作者@韩枫有点帅开发，模拟宝可梦BP对战系统</p>
+            <div class="room-info">
+                <span>房间ID: <span id="room-id-display">加载中...</span></span>
+                <button class="control-btn small" id="share-room-btn">
+                    <i class="fas fa-share-alt"></i> 分享房间
+                </button>
+            </div>
         </div>
         
+        <!-- BP阶段指示器 -->
         <div class="bp-phase-indicator">
             <i class="fas fa-flag phase-icon red-phase"></i>
             <span id="phase-text">红方禁用阶段 (剩余: 3)</span>
             <i class="fas fa-flag phase-icon blue-phase"></i>
         </div>
         
+        <!-- 主内容区 -->
         <div class="main-content">
             <!-- 红队区域 -->
             <div class="team-section red-team" id="red-team-section">
@@ -92,7 +96,7 @@
                             <option value="ou">【Gen9】OverUsed</option>
                             <option value="uubl">【Gen9】UUBL </option>
                             <option value="uu">【Gen9】UnderUsed</option>
-                            <option value="自定义">自定义</option>
+                            <option value="自定义">第一赛段</option>
                         </select>
                         <select id="sort-filter" class="filter-select">
                             <option value="id">按编号排序</option>
@@ -130,9 +134,9 @@
                     <button class="control-btn" id="import-btn">
                         <i class="fas fa-file-import"></i> 数据导出
                     </button>
-                    <!-- 新增的实时协作按钮 -->
-                    <button class="control-btn" id="collaborate-btn" onclick="TogetherJS(this); return false;">
-                        <i class="fas fa-users"></i> 多人联机
+                    <!-- 多人聊天按钮 -->
+                    <button class="control-btn" id="collaborate-btn">
+                        <i class="fas fa-users"></i> 多人聊天
                     </button>
                     <button class="control-btn" id="red-team-toggle" style="background-color: var(--red-team-color);">
                         <i class="fas fa-chevron-right"></i> 红队面板
@@ -248,29 +252,90 @@
             <div id="suggested-pokemon" class="pokemon-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 15px;"></div>
         </div>
     </div>
-
-    <!-- 公告浮窗 -->
-    <div class="announcement-modal" id="announcement-modal">
-        <div class="announcement-header">
-            <h3>公告</h3>
-            <span class="close-announcement">&times;</span>
-        </div>
-        <div class="announcement-content">
-            <img src="gonggao/diyi.jpg" alt="公告图片">
-        </div>
+    
+<div class="chat-container" id="chat-container">
+    <div class="chat-header">
+        <span>多人聊天室</span>
+        <span class="close-chat">&times;</span>
     </div>
+    <div class="chat-messages" id="chat-messages">
+        <!-- 消息将在这里动态添加 -->
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="输入消息..." class="chat-input-field">
+        <button id="send-message" class="chat-send-btn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
 
     <script src="tier.js"></script>
     <script src="app.js"></script>
+    <script src="multiplayer.js"></script>
+    <script src="username.js"></script>
     <script>
-        // 公告浮窗关闭功能
-        document.querySelector('.close-announcement').addEventListener('click', function() {
-            document.getElementById('announcement-modal').style.display = 'none';
-        });
-        
-        // 默认显示公告浮窗
-        window.addEventListener('load', function() {
-            document.getElementById('announcement-modal').style.display = 'block';
+        document.addEventListener('DOMContentLoaded', () => {
+            const app = new PokemonBPApp();
+            // 初始化多人联机功能
+            const multiplayer = initMultiplayer(app.bpManager);
+            const usernameManager = initUsernameManager(multiplayer);
+            
+            // 确保聊天按钮功能
+            const chatBtn = document.getElementById('collaborate-btn');
+            const chatContainer = document.getElementById('chat-container');
+            usernameManager.addUsernameChangeButton();
+            
+            // 聊天窗口拖拽功能
+            let isDragging = false;
+            let offsetX, offsetY;
+            
+            document.querySelector('.chat-header').addEventListener('mousedown', (e) => {
+                isDragging = true;
+                offsetX = e.clientX - chatContainer.getBoundingClientRect().left;
+                offsetY = e.clientY - chatContainer.getBoundingClientRect().top;
+                chatContainer.style.cursor = 'grabbing';
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                chatContainer.style.left = (e.clientX - offsetX) + 'px';
+                chatContainer.style.top = (e.clientY - offsetY) + 'px';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                chatContainer.style.cursor = '';
+            });
+            
+            // 切换聊天窗口显示
+            chatBtn.addEventListener('click', () => {
+                chatContainer.classList.toggle('show');
+                chatBtn.innerHTML = chatContainer.classList.contains('show') 
+                    ? '<i class="fas fa-users"></i> 关闭聊天' 
+                    : '<i class="fas fa-users"></i> 多人聊天';
+            });
+            
+            // 关闭按钮
+            document.querySelector('.close-chat').addEventListener('click', () => {
+                chatContainer.classList.remove('show');
+                chatBtn.innerHTML = '<i class="fas fa-users"></i> 多人聊天';
+            });
+            
+            // 发送消息功能
+            document.getElementById('send-message').addEventListener('click', sendMessage);
+            document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+            
+            function sendMessage() {
+                const input = document.getElementById('chat-input');
+                const message = input.value.trim();
+                if (message) {
+                    // 使用multiplayer实例发送消息
+                    multiplayer.sendChatMessage(message);
+                    input.value = '';
+                }
+            }
         });
     </script>
 </body>
