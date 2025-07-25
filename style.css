@@ -1029,4 +1029,71 @@
     text-align: right;
 }
 
-/* 其他现有样式保持不变 */
+/* 聊天标签样式 */
+.chat-tabs {
+    display: flex;
+    gap: 5px;
+}
+
+.chat-tab {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.chat-tab.active {
+    background: rgba(255,255,255,0.4);
+    font-weight: bold;
+}
+
+/* 用户列表样式 */
+.user-list {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+}
+
+.user-list-header {
+    padding: 10px;
+    background: #f1f1f1;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+}
+
+.user-list-content {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 5px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    background: #f8f9fa;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.user-name {
+    flex: 1;
+}
+
+.user-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4CAF50;
+}
