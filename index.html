@@ -29,7 +29,7 @@
         <!-- BP阶段指示器 -->
         <div class="bp-phase-indicator">
             <i class="fas fa-flag phase-icon red-phase"></i>
-            <span id="phase-text">红方禁用阶段 (剩余: 3)</span>
+            <span id="phase-text">请开始拖动精灵到自选位</span>
             <i class="fas fa-flag phase-icon blue-phase"></i>
         </div>
         
@@ -37,12 +37,12 @@
         <div class="main-content">
             <!-- 红队区域 -->
             <div class="team-section red-team" id="red-team-section">
-                <div class="team-title red-title">红队 (先手)</div>
+                <div class="team-title red-title">红方自选</div>
                 <div class="team-list" id="red-team-list">
                     <div class="empty-message">暂无选择的宝可梦</div>
                 </div>
                 <div class="banned-list">
-                    <div class="team-title banned-title">红队禁用</div>
+                    <div class="team-title banned-title">红方禁选</div>
                     <div id="red-banned-list">
                         <div class="empty-message">暂无禁用的宝可梦</div>
                     </div>
@@ -99,10 +99,10 @@
                             <option value="自定义">第一赛段</option>
                         </select>
                         <select id="sort-filter" class="filter-select">
-                            <option value="id">按编号排序</option>
-                            <option value="name">按名称排序</option>
-                            <option value="weight">按重量排序</option>
-                            <option value="height">按高度排序</option>
+                            <option value="id">编号排序</option>
+                            <option value="name">名称排序</option>
+                            <option value="weight">重量排序</option>
+                            <option value="height">高度排序</option>
                         </select>
                     </div>
                     <div class="progress-container" id="progress-container">
@@ -132,7 +132,7 @@
                         <i class="fas fa-file-export"></i> 双方队伍
                     </button>
                     <button class="control-btn" id="import-btn">
-                        <i class="fas fa-file-import"></i> 数据导出
+                        <i class="fas fa-file-import"></i> 数据导入
                     </button>
                     <!-- 多人聊天按钮 -->
                     <button class="control-btn" id="collaborate-btn">
@@ -149,12 +149,12 @@
             
             <!-- 蓝队区域 -->
             <div class="team-section blue-team" id="blue-team-section">
-                <div class="team-title blue-title">蓝队 (后手)</div>
+                <div class="team-title blue-title">蓝方自选</div>
                 <div class="team-list" id="blue-team-list">
                     <div class="empty-message">暂无选择的宝可梦</div>
                 </div>
                 <div class="banned-list">
-                    <div class="team-title banned-title">蓝队禁用</div>
+                    <div class="team-title banned-title">蓝方禁选</div>
                     <div id="blue-banned-list">
                         <div class="empty-message">暂无禁用的宝可梦</div>
                     </div>
@@ -256,10 +256,18 @@
 <div class="chat-container" id="chat-container">
     <div class="chat-header">
         <span>多人聊天室</span>
+        <div class="chat-tabs">
+            <button class="chat-tab active" data-tab="messages">chat</button>
+            <button class="chat-tab" data-tab="users">user</button>
+        </div>
         <span class="close-chat">&times;</span>
     </div>
     <div class="chat-messages" id="chat-messages">
         <!-- 消息将在这里动态添加 -->
+    </div>
+    <div class="user-list" id="user-list">
+        <div class="user-list-header">在线用户 (<span id="user-count">0</span>)</div>
+        <div class="user-list-content" id="user-list-content"></div>
     </div>
     <div class="chat-input-area">
         <input type="text" id="chat-input" placeholder="输入消息..." class="chat-input-field">
