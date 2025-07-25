@@ -237,7 +237,6 @@ class MultiplayerManager {
                 <span class="message-username">${message.username}:</span>
             </div>
             <div class="message-text">${message.message}</div>
-            <div class="message-time">${new Date(message.timestamp).toLocaleTimeString()}</div>
         `;
         
         messagesContainer.appendChild(messageElement);
