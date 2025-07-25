@@ -989,10 +989,6 @@
     font-weight: bold;
 }
 
-.message-time {
-    opacity: 0.7;
-}
-
 /* 消息头像样式 */
 .message-avatar {
     width: 40px;
@@ -1020,13 +1016,6 @@
     word-break: break-word;
      margin-top: -5px;
 
-}
-
-.message-time {
-    font-size: 0.8em;
-    color: #718096;
-    margin-left: 15px;
-    text-align: right;
 }
 
 /* 聊天标签样式 */
