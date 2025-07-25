@@ -14,6 +14,9 @@ class UsernameManager {
         
         // 添加用户名修改按钮
         this.addUsernameChangeButton();
+        
+        // 初始化用户列表
+        this.initUserList();
     }
     
     initUsernameModal() {
@@ -368,6 +371,78 @@ class UsernameManager {
         });
         
         chatHeader.appendChild(changeBtn);
+    }
+    
+    // 新增：初始化用户列表
+    initUserList() {
+        // 确保DOM加载完成
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setupUserListListener());
+        } else {
+            this.setupUserListListener();
+        }
+    }
+    
+    // 新增：设置用户列表监听器
+    setupUserListListener() {
+        if (!this.multiplayer || !this.multiplayer.usersRef) return;
+        
+        // 监听用户变化更新列表
+        this.multiplayer.usersRef.on('value', () => this.updateUserList());
+        
+        // 设置聊天标签切换事件
+        this.setupChatTabListener();
+    }
+    
+    // 新增：设置聊天标签切换
+    setupChatTabListener() {
+        const tabs = document.querySelectorAll('.chat-tab');
+        if (!tabs.length) return;
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                if (tab.dataset.tab === 'users') {
+                    this.updateUserList();
+                }
+            });
+        });
+    }
+    
+    // 新增：更新用户列表
+    updateUserList() {
+        if (!this.multiplayer || !this.multiplayer.usersRef) return;
+        
+        const userListContent = document.getElementById('user-list-content');
+        const userCountElement = document.getElementById('user-count');
+        
+        if (!userListContent || !userCountElement) return;
+        
+        this.multiplayer.usersRef.once('value').then((snapshot) => {
+            const users = snapshot.val();
+            userListContent.innerHTML = '';
+            
+            if (!users) {
+                userCountElement.textContent = '0';
+                return;
+            }
+            
+            const userCount = Object.keys(users).length;
+            userCountElement.textContent = userCount;
+            
+            // 遍历所有用户
+            Object.values(users).forEach(user => {
+                const userItem = document.createElement('div');
+                userItem.className = 'user-item';
+                
+                userItem.innerHTML = `
+                    <img src="home/${user.avatar || '1'}.png" alt="${user.name}" class="user-avatar">
+                    <div class="user-name">${user.name}</div>
+                    <div class="user-status"></div>
+                `;
+                
+                userListContent.appendChild(userItem);
+            });
+        });
     }
 }
 
