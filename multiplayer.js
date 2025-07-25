@@ -175,6 +175,29 @@ class MultiplayerManager {
             if (e.key === 'Enter') this.sendChatMessage();
         });
         
+        // 添加标签切换功能
+        document.querySelectorAll('.chat-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                
+                // 更新活动标签
+                document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // 显示对应的视图
+                if (tabName === 'messages') {
+                    document.getElementById('chat-messages').style.display = 'flex';
+                    document.getElementById('user-list').style.display = 'none';
+                    document.querySelector('.chat-input-area').style.display = 'flex';
+                } else {
+                    document.getElementById('chat-messages').style.display = 'none';
+                    document.getElementById('user-list').style.display = 'flex';
+                    document.querySelector('.chat-input-area').style.display = 'none';
+                    this.updateUserList(); // 切换时更新用户列表
+                }
+            });
+        });
+        
         this.chatRef.limitToLast(50).on('child_added', (snapshot) => {
             const message = snapshot.val();
             this.displayChatMessage(message);
