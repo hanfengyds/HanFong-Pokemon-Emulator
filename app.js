@@ -54,7 +54,7 @@ function getPokemonImageUrl(id) {
 // BP管理器
 class BPManager {
     constructor() {
-        this.phase = 'red-ban'; // 红方禁用阶段
+        this.phase = 'red-pick'; // 红方禁用阶段
         this.remainingBans = 3; // 剩余禁用次数
         this.totalBans = 3; // 总禁用次数
         this.totalPicks = 6; // 每队选择数量
@@ -65,9 +65,9 @@ class BPManager {
         this.filteredPokemon = [];
         this.currentTeam = 'red'; // 当前操作队伍
         this.pickOrder = [
-            'red-ban', 'blue-ban', 'red-ban', 'blue-ban', 
-            'red-pick', 'blue-pick', 'red-pick','blue-pick',  'red-pick', 'blue-pick',
-            'red-pick','blue-pick',  'red-pick', 'blue-pick',  'red-pick','blue-pick',
+            'red-pick', 'blue-pick', 'blue-ban', 'red-pick', 
+            'red-ban', 'blue-pick', 'blue-ban','red-pick',  'red-ban', 'blue-pick',
+            'blue-ban', 'red-pick', 'red-ban','blue-pick', 'red-pick', 'blue-pick', 'red-pick', 'blue-pick'
         ];
         this.currentPhaseIndex = 0;
         this.currentTier = 'all'; // 当前分级
@@ -912,11 +912,13 @@ class PokemonBPApp {
         });
         
         this.elements.redTeamToggle.addEventListener('click', () => {
-            this.elements.redTeamSection.classList.toggle('active');
+            this.elements.redTeamSection.classList.add('active');
+            this.elements.blueTeamSection.classList.remove('active');
         });
         
         this.elements.blueTeamToggle.addEventListener('click', () => {
-            this.elements.blueTeamSection.classList.toggle('active');
+            this.elements.blueTeamSection.classList.add('active');
+            this.elements.redTeamSection.classList.remove('active');
         });
         
         document.getElementById('suggested-pokemon').addEventListener('click', (e) => {
