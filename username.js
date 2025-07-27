@@ -96,7 +96,7 @@ class UsernameManager {
         avatarGrid.innerHTML = ''; // 清空现有内容
 
         // 指定特定的头像编号数组
-        const availableAvatars = [4,36,25,79, 94,143,212,430,722,959,259,778];
+        const availableAvatars = [4,36,25,79, 94,143,212,430,722,983,259,778];
         
         availableAvatars.forEach(i => {
             const avatarItem = document.createElement('div');
