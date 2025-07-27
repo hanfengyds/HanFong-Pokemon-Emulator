@@ -716,6 +716,8 @@ transformPokemonData(apiData) {
                             .then(response => response.json())
                             .then(data => {
                                 // 创建并显示提示框
+                                // 移除所有现有提示框
+                                document.querySelectorAll('.ability-tooltip').forEach(tooltip => tooltip.remove());
                                 const tooltip = document.createElement('div');
                                 tooltip.className = 'ability-tooltip';
                                 tooltip.innerHTML = data.effect.replace(/\n/g, '<br>');
