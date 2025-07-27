@@ -943,7 +943,7 @@
 
 .message {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 0px;
     padding: 6px 8px;
     border-radius: 4px;
@@ -1004,17 +1004,19 @@
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    
 }
 
 .message-username {
     font-weight: bold;
     color: #4a5568;
+    white-space: nowrap;
 }
 
 .message-text {
     margin-left: 10px; /* 头像宽度 + 边距 */
     word-break: break-word;
-     margin-top: -5px;
+    margin-top: 8px;
 
 }
 
