@@ -730,8 +730,7 @@ transformPokemonData(apiData) {
 
                     span.addEventListener('mouseout', function() {
                         // 移除提示框
-                        const tooltip = document.querySelector('.ability-tooltip');
-                        if (tooltip) tooltip.remove();
+                        document.querySelectorAll('.ability-tooltip').forEach(tooltip => tooltip.remove());
                     });
                 });
             })
