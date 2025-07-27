@@ -25,7 +25,7 @@ let chineseNames = {};
 let abilityIndex = {};
 
 Promise.all([
-  fetch('pokemon-name.json').then(res => res.json()),
+  fetch('pokemon-index.json').then(res => res.json()),
   fetch('ability-index.json').then(res => res.json())
 ]).then(([nameData, abilityData]) => {
   // 反转键值对：{中文: 英文} → {英文: 中文}
@@ -58,6 +58,11 @@ class BPManager {
         this.remainingBans = 3; // 剩余禁用次数
         this.totalBans = 3; // 总禁用次数
         this.totalPicks = 6; // 每队选择数量
+        // 新增计数器初始化
+        this.redPicks = 0;
+        this.bluePicks = 0;
+        this.redBans = 0;
+        this.blueBans = 0;
         this.redTeam = [];
         this.blueTeam = [];
         this.bannedPokemon = [];
@@ -65,12 +70,29 @@ class BPManager {
         this.filteredPokemon = [];
         this.currentTeam = 'red'; // 当前操作队伍
         this.pickOrder = [
-            'red-pick', 'blue-pick', 'blue-ban', 'red-pick', 
-            'red-ban', 'blue-pick', 'blue-ban','red-pick',  'red-ban', 'blue-pick',
-            'blue-ban', 'red-pick', 'red-ban','blue-pick', 'red-pick', 'blue-pick', 'red-pick', 'blue-pick'
+                       'red-pick', 'blue-pick', 'blue-ban', 'red-pick', 
+            'red-ban', 'blue-pick', 'blue-ban', 'red-pick',  'red-ban', 'blue-pick',
+            'blue-ban', 'red-pick', 'red-ban', 'blue-pick', 'red-pick', 'blue-pick', 'red-pick', 'blue-pick'
         ];
+        // 新增：计算各阶段总数
+        this.redTotalPicks = this.pickOrder.filter(p => p === 'red-pick').length;
+        this.blueTotalPicks = this.pickOrder.filter(p => p === 'blue-pick').length;
+        this.redTotalBans = this.pickOrder.filter(p => p === 'red-ban').length;
+        this.blueTotalBans = this.pickOrder.filter(p => p === 'blue-ban').length;
+        // 新增：初始化当前阶段计数器
         this.currentPhaseIndex = 0;
+        this.updateCurrentCounters(); // 初始化计数器
         this.currentTier = 'all'; // 当前分级
+    }
+    
+    // 新增：更新当前阶段计数器的辅助方法
+    updateCurrentCounters() {
+        const currentPhase = this.pickOrder[this.currentPhaseIndex];
+        // 修复：初始阶段计数器从0开始
+        if (currentPhase === 'red-pick') this.redPicks = 0;
+        else if (currentPhase === 'blue-pick') this.bluePicks = 0;
+        else if (currentPhase === 'red-ban') this.redBans = 0;
+        else if (currentPhase === 'blue-ban') this.blueBans = 0;
     }
     
     init(pokemonList) {
@@ -85,6 +107,16 @@ class BPManager {
             this.phase = 'completed';
         } else {
             this.phase = this.pickOrder[this.currentPhaseIndex];
+            // 移除：阶段切换时不再直接递增计数器
+            // if (this.phase === 'red-pick') {
+            //     this.redPicks++;
+            // } else if (this.phase === 'blue-pick') {
+            //     this.bluePicks++;
+            // } else if (this.phase === 'red-ban') {
+            //     this.redBans++;
+            // } else if (this.phase === 'blue-ban') {
+            //     this.blueBans++;
+            // }
             if (this.phase.includes('ban')) {
                 this.remainingBans = 1;
             }
@@ -105,11 +137,20 @@ class BPManager {
         }
         
         const isRedPhase = this.phase.includes('red');
-        const action = this.phase.includes('ban') ? '禁用' : '选择';
+        const isPickPhase = this.phase.includes('pick');
         
-        phaseText.textContent = `${isRedPhase ? '红队' : '蓝队'}${action}阶段${
-            this.phase.includes('ban') ? ` (剩余: ${this.remainingBans})` : ''
-        }`;
+        let phaseLabel, current, total;
+        if (isPickPhase) {
+            phaseLabel = isRedPhase ? '红色方自选阶段' : '蓝色方自选阶段';
+            current = isRedPhase ? this.redTeam.length : this.blueTeam.length;
+            total = isRedPhase ? this.redTotalPicks : this.blueTotalPicks;
+        } else {
+            phaseLabel = isRedPhase ? '红色方禁用阶段' : '蓝色方禁用阶段';
+            current = isRedPhase ? this.redBans : this.blueBans;
+            total = isRedPhase ? this.redTotalBans : this.blueTotalBans;
+        }
+        
+        phaseText.textContent = `${phaseLabel}（${current}/${total}）`;
         
         phaseIconRed.style.opacity = isRedPhase ? '1' : '0.5';
         phaseIconBlue.style.opacity = !isRedPhase ? '1' : '0.5';
@@ -127,6 +168,10 @@ class BPManager {
             this.bannedPokemon.push(pokemon);
             this.remainingBans--;
             
+            // 新增：禁用后递增对应计数器
+            if (this.phase === 'red-ban') this.redBans++;
+            else if (this.phase === 'blue-ban') this.blueBans++;
+            
             if (this.remainingBans === 0) {
                 this.nextPhase();
             } else {
@@ -135,16 +180,13 @@ class BPManager {
         } else {
             if (this.phase.includes('red')) {
                 this.redTeam.push(pokemon);
+                this.redPicks++;
             } else {
                 this.blueTeam.push(pokemon);
+                this.bluePicks++;
             }
             
-            if ((this.phase.includes('red') && this.redTeam.length >= this.totalPicks) || 
-                (this.phase.includes('blue') && this.blueTeam.length >= this.totalPicks)) {
-                this.nextPhase();
-            } else {
-                this.nextPhase();
-            }
+            this.nextPhase();
         }
         
         this.updateUI();
@@ -167,10 +209,14 @@ class BPManager {
         this.blueTeam = [];
         this.bannedPokemon = [];
         this.currentPhaseIndex = 0;
+        // 新增：重置所有计数器
+        this.redPicks = 0;
+        this.bluePicks = 0;
+        this.redBans = 0;
+        this.blueBans = 0;
         this.updatePhase();
         this.updateUI();
     }
-    
     randomSelect() {
         if (this.phase === 'completed') return;
         
@@ -463,103 +509,76 @@ class PokemonBPApp {
         };
     }
     
-    async loadPokemonData() {
-        this.elements.progressContainer.style.display = 'block';
-        
-        try {
-            // 获取所有宝可梦物种而非基础形态
-            const speciesResponse = await fetch('https://pokeapi.co/api/v2/pokemon-species?limit=1010');
-            const speciesData = await speciesResponse.json();
-            
-            const allVarieties = [];
-            
-            // 收集所有形态URL
-            for (const species of speciesData.results) {
-                const speciesDetail = await fetch(species.url).then(res => res.json());
-                
-                // 添加所有形态
-                for (const variety of speciesDetail.varieties) {
-                    allVarieties.push(variety.pokemon.url);
-                }
-            }
-            
-            // 去重URL，避免重复加载
-            const uniqueUrls = [...new Set(allVarieties)];
-            
-            const batchSize = 50;
-            let loadedCount = 0;
-            const totalCount = uniqueUrls.length;
-            
-            for (let i = 0; i < totalCount; i += batchSize) {
-                const batchUrls = uniqueUrls.slice(i, i + batchSize);
-                const pokemonDetails = await Promise.all(
-                    batchUrls.map(async (url) => {
-                        try {
-                            const res = await fetch(url);
-                            return await res.json();
-                        } catch (error) {
-                            console.error(`加载宝可梦数据失败: ${url}`, error);
-                            return null;
-                        }
-                    })
-                );
-                
-                const validPokemon = pokemonDetails.filter(p => p !== null);
-                const transformedData = validPokemon.map(d => this.transformPokemonData(d));
-                
-                this.bpManager.allPokemon.push(...transformedData);
-                
-                loadedCount += validPokemon.length;
-                const progress = (loadedCount / totalCount) * 100;
-                this.elements.progressBar.style.width = `${progress}%`;
-                this.elements.loading.querySelector('span').textContent = 
-                    `正在加载宝可梦数据... (${loadedCount}/${totalCount})`;
-                
-                await new Promise(resolve => setTimeout(resolve, 500));
-            }
-            
-            this.renderPokemonGrid(this.bpManager.allPokemon);
-            this.bpManager.init(this.bpManager.allPokemon);
-            this.elements.loading.style.display = 'none';
-            this.elements.progressContainer.style.display = 'none';
-            
-        } catch (error) {
-            console.error('加载宝可梦数据失败:', error);
-            this.elements.loading.innerHTML = `
-                <div style="color: #e74c3c;">
-                    <i class="fas fa-exclamation-triangle"></i> 
-                    加载失败: ${error.message}
-                </div>
-            `;
-            this.elements.progressContainer.style.display = 'none';
-        }
-    }
+async loadPokemonData() {
+    this.elements.progressContainer.style.display = 'block';
+    this.elements.loading.querySelector('span').textContent = '正在加载宝可梦数据...';
     
-    transformPokemonData(apiData) {
-        const id = apiData.id;
-        const englishName = apiData.name;
-        const chineseName = chineseNames[englishName] || englishName;
+    try {
+        // 1. 从本地加载数据
+        const response = await fetch('pokemon-details.json');
+        if (!response.ok) throw new Error(`加载失败: ${response.status}`);
         
+        const pokemonData = await response.json();
         
-        return {
-            id: id,
-            name: chineseName,
-            englishName: englishName, // 添加英文名用于分级过滤
-            image: getPokemonImageUrl(id),
-            types: apiData.types.map(t => t.type.name),
-            stats: {
-                hp: apiData.stats[0].base_stat,
-                attack: apiData.stats[1].base_stat,
-                defense: apiData.stats[2].base_stat,
-                specialAttack: apiData.stats[3].base_stat,
-                specialDefense: apiData.stats[4].base_stat,
-                speed: apiData.stats[5].base_stat
-            },
-            height: apiData.height / 10,
-            weight: apiData.weight / 10,
-            abilities: apiData.abilities.map(a => a.ability.name)
-        };
+        // 2. 转换数据格式
+        this.bpManager.allPokemon = pokemonData.map(pokemon => ({
+            id: pokemon.id,
+            name: chineseNames[pokemon.name] || pokemon.name,
+            englishName: pokemon.name,
+            image: pokemon.image || getPokemonImageUrl(pokemon.id),
+            types: pokemon.types,
+            stats: pokemon.stats,
+            height: pokemon.height,
+            weight: pokemon.weight,
+            abilities: pokemon.abilities
+        }));
+        
+        // 3. 初始化UI
+        this.renderPokemonGrid(this.bpManager.allPokemon);
+        this.bpManager.init(this.bpManager.allPokemon);
+        
+        this.elements.loading.style.display = 'none';
+        this.elements.progressContainer.style.display = 'none';
+        
+    } catch (error) {
+        console.error('加载本地宝可梦数据失败:', error);
+        this.elements.loading.innerHTML = `
+            <div style="color: #e74c3c;">
+                <i class="fas fa-exclamation-triangle"></i> 
+                加载失败: ${error.message}
+            </div>
+        `;
+        this.elements.progressContainer.style.display = 'none';
+        
+        // 可选：保留原始API调用作为备用
+        // await this.loadFromPokeAPI(); 
     }
+}
+    
+transformPokemonData(apiData) {
+    const id = apiData.id;
+    const englishName = apiData.name;
+    const chineseName = chineseNames[englishName] || englishName;
+    
+    return {
+        id: id,
+        name: chineseName,
+        englishName: englishName,
+        image: getPokemonImageUrl(id),
+        types: apiData.types.map(t => t.type.name),
+        stats: {
+            hp: apiData.stats[0].base_stat,
+            attack: apiData.stats[1].base_stat,
+            defense: apiData.stats[2].base_stat,
+            specialAttack: apiData.stats[3].base_stat,
+            specialDefense: apiData.stats[4].base_stat,
+            speed: apiData.stats[5].base_stat
+        },
+        height: apiData.height / 10,
+        weight: apiData.weight / 10,
+        abilities: apiData.abilities.map(a => a.ability.name)
+    };
+}
     
     renderPokemonGrid(pokemonList) {
         this.bpManager.filteredPokemon = pokemonList;
@@ -766,13 +785,13 @@ class PokemonBPApp {
     
     setupEventListeners() {
         // 修改点击事件为显示精灵详情
-        this.elements.pokemonGrid.addEventListener('click', (e) => {
-            const card = e.target.closest('.pokemon-card');
-            if (card) {
-                const pokemonId = parseInt(card.dataset.id);
-                this.showPokemonDetails(pokemonId);
-            }
-        });
+       this.elements.pokemonGrid.addEventListener('click', (e) => {
+                const card = e.target.closest('.pokemon-card');
+                if (card) {
+                    const pokemonId = parseInt(card.dataset.id);
+                    this.showPokemonDetails(pokemonId);
+                }
+            });
         
         // 添加拖拽功能
         this.elements.pokemonGrid.addEventListener('dragstart', (e) => {
