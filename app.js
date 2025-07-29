@@ -203,7 +203,7 @@ class BPManager {
     }
     
     reset() {
-        this.phase = 'red-ban';
+        this.phase = this.pickOrder[0]; // 使用设计的初始阶段
         this.remainingBans = this.totalBans;
         this.redTeam = [];
         this.blueTeam = [];
