@@ -146,23 +146,25 @@ class MultiplayerManager {
     
     setupChat() {
         const chatBtn = document.getElementById('collaborate-btn');
-        chatBtn.onclick = null;
+        chatBtn.onclick = null; // 清除可能存在的旧事件
         
         chatBtn.addEventListener('click', (e) => {
             e.preventDefault();
             const chatContainer = document.getElementById('chat-container');
             
-            if (chatContainer.style.display === 'none') {
-                chatContainer.style.display = 'block';
-                chatBtn.innerHTML = '<i class="fas fa-users"></i> 关闭聊天';
-            } else {
-                chatContainer.style.display = 'none';
+            if (chatContainer.classList.contains('show')) {
+                chatContainer.classList.remove('show');
                 chatBtn.innerHTML = '<i class="fas fa-users"></i> 多人聊天';
+            } else {
+                chatContainer.classList.add('show');
+                chatBtn.innerHTML = '<i class="fas fa-users"></i> 关闭聊天';
             }
         });
         
+        // 修复关闭按钮事件，保持状态一致
         document.querySelector('.close-chat').addEventListener('click', () => {
-            document.getElementById('chat-container').style.display = 'none';
+            const chatContainer = document.getElementById('chat-container');
+            chatContainer.classList.remove('show'); // 使用classList而非直接设置style
             chatBtn.innerHTML = '<i class="fas fa-users"></i> 多人聊天';
         });
         
