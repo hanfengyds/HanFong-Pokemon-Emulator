@@ -25,7 +25,23 @@ const tierPokemons = {
     ],
     // 可以继续添加其他分级
     uber: [
-        // 这里添加Uber分级的宝可梦名单
+                'annihilape', 'arceus', 'archaludon', 'baxcalibur', 'calyrex-ice', 'chien-pao', 'chi-yu',
+        'deoxys', 'deoxys-attack', 'dialga', 'dialga-origin',
+        'espathra', 'eternatus',
+        'flutter mane',
+        'giratina', 'giratina-origin', 'gouging fire', 'groudon',
+        'ho-oh',
+        'iron bundle',
+        'koraidon', 'kyogre', 'kyurem-black', 'kyurem-white',
+        'landorus', 'lugia', 'lunala', 'magearna', 'mewtwo',
+        'necrozma-dawn-wings', 'necrozma-dusk-mane',
+        'ogerpon-hearthflame', 'palafin-hero', 'palkia', 'palkia-origin',
+        'rayquaza', 'regieleki', 'reshiram', 'roaring moon',
+        'shaymin-sky', 'sneasler', 'solgaleo', 'spectrier',
+        'terapagos', 'terapagos-stellar', 'terapagos-terastal',
+        'ursaluna-bloodmoon', 'urshifu', 'urshifu-rapid-strike', 'urshifu-single-strike',
+        'volcarona',
+        'zacian', 'zacian-crowned', 'zamazenta-crowned', 'zekrom'
     ],
     自定义: [
        'gigalith', 'sandslash', 'poliwrath', 'lanturn',
