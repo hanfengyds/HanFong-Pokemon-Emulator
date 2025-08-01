@@ -753,6 +753,13 @@
     align-items: center;
 }
 
+
+.vs-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .close-btn {
     position: absolute;
     top: 10px;
@@ -765,7 +772,6 @@
 
 .team-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 20px;
 }
@@ -773,8 +779,7 @@
 .vs {
     font-size: 24px;
     font-weight: bold;
-    padding: 10px 0;
-    margin: 10px 0;
+    margin: 0 5px;
 }
 
 .red-team, .blue-team {
@@ -843,7 +848,7 @@
 
 
 /* 聊天容器 - 完整修复版 */
-#chat-container {
+.chat-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -859,8 +864,8 @@
     overflow: hidden; /* 保持溢出隐藏 */
 }
 
-#chat-container.show {
-    display: flex;
+.chat-container.show {
+    display: block;
 }
 
 /* 聊天头部 */
@@ -1071,6 +1076,8 @@
     background: #f8f9fa;
 }
 
+.user-info { display: flex; align-items: center; }
+
 .user-avatar {
     width: 36px;
     height: 36px;
@@ -1081,6 +1088,7 @@
 
 .user-name {
     flex: 1;
+    margin-right: 8px;
 }
 
 .user-status {
@@ -1088,4 +1096,94 @@
     height: 10px;
     border-radius: 50%;
     background: #4CAF50;
+}
+
+.user-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4CAF50;
+}
+
+/* 玩家角色样式 */
+.user-role {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.user-role.red {
+    background-color: var(--red-team-color);
+    color: white;
+}
+
+.user-role.spectator {
+    background-color: #95a5a6;
+    color: white;
+}
+/* 系统公告样式 */
+.system-announcement {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 15px;
+    border-left: 5px solid var(--blue-team-color);
+}
+
+.system-announcement h3 {
+    color: var(--blue-team-color);
+    margin-top: 0;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 10px;
+}
+
+.system-announcement ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.system-announcement li {
+    margin: 12px 0;
+    list-style-type: none;
+    padding-left: 10px;
+    position: relative;
+}
+
+.system-announcement li::before {
+    content: "•";
+    color: var(--blue-team-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+/* 公告弹窗独立样式 */
+.announcement-modal {
+    width: 600px; /* 自定义公告弹窗宽度 */
+    /* 以下是可选的额外样式定制 */
+    max-width: 100%;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+
+/* 复制按钮样式 */
+.copy-btn {
+    font-size: inherit;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.copy-btn.blue {
+    background-color: var(--blue-team-color);
+    color: white;
+}
+
+.copy-btn.red {
+    background-color: var(--red-team-color);
+    color: white;
 }
