@@ -1,4 +1,4 @@
-// multiplayer.js - 宝可梦BP对战系统多人联机模块（完整修复版）
+// multiplayer.js - 宝可梦BP对战系统多http://127.0.0.1:3000/index.html人联机模块（完整修复版）
 
 class MultiplayerManager {
     constructor(bpManager) {
@@ -6,15 +6,16 @@ class MultiplayerManager {
         this.roomId = this.getRoomIdFromUrl() || this.generateRoomId();
         this.userId = this.generateUserId();
         this.isHost = !this.getRoomIdFromUrl();
-        this.currentUsername = null; // 新增：当前用户名
-        this.currentAvatar = '1'; // 默认头像
-        
+        this.currentUsername = null;
+        this.currentAvatar = '1';
+        this.currentTeam = 'red'; // 默认红队
+
         // 初始化Firebase
         this.initFirebase();
-        
+
         // 设置UI事件
         this.setupUI();
-        
+
         // 初始化聊天功能
         this.setupChat();
     }
@@ -44,11 +45,21 @@ class MultiplayerManager {
     }
     
     setupStateListener() {
+        // 保留房间状态监听
         this.stateRef.on('value', (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 this.applyRemoteState(data);
             }
+        });
+    
+        // 添加用户队伍变化监听（修正路径）
+        this.usersRef.on('child_changed', (snapshot) => {
+            const userData = snapshot.val();
+            const userId = snapshot.key;
+    
+            // 处理所有用户的变化，包括自己
+            this.updateRemoteUserTeam(userId, userData.team, userData.name, userData.avatar);
         });
     }
     
@@ -92,26 +103,31 @@ class MultiplayerManager {
     
     setupUserPresence() {
         const userRef = this.usersRef.child(this.userId);
-        
+
         // 使用currentUsername（如果已设置）或默认随机用户名
         const username = this.currentUsername || `用户${Math.floor(Math.random() * 1000)}`;
-        
+
         userRef.set({
             name: username,
+            avatar: this.currentAvatar,
+            team: this.currentTeam,
             isHost: this.isHost,
             joinedAt: firebase.database.ServerValue.TIMESTAMP
         });
-        
+
         userRef.onDisconnect().remove();
-        
+
         this.usersRef.on('child_added', (snapshot) => {
             if (snapshot.key !== this.userId) {
-                this.showUserJoined(snapshot.val().name);
+                const userData = snapshot.val();
+                this.showUserJoined(userData.name);
+                this.updateRemoteUserTeam(snapshot.key, userData.team, userData.name, userData.avatar);
             }
         });
-        
+
         this.usersRef.on('child_removed', (snapshot) => {
             this.showUserLeft(snapshot.val().name);
+            this.removeRemoteUser(snapshot.key);
         });
     }
     
@@ -233,9 +249,13 @@ class MultiplayerManager {
         const messageElement = document.createElement('div');
         messageElement.className = `message ${message.team}-message`;
         
+        // 修复头像路径，确保不会重复添加.png扩展名
+        const avatarFileName = message.avatar || '1.png';
+        const avatarPath = avatarFileName.includes('.png') ? `home/${avatarFileName}` : `home/${avatarFileName}.png`;
+        
         messageElement.innerHTML = `
             <div class="message-header">
-                <img class="message-avatar" src="home/${message.avatar || '1'}.png" alt="${message.username}">
+                <img class="message-avatar" src="${avatarPath}" alt="${message.username}">
                 <span class="message-username">${message.username}:</span>
             </div>
             <div class="message-text">${message.message}</div>
@@ -329,6 +349,67 @@ class MultiplayerManager {
             userRef.update({
                 name: newUsername
             });
+        }
+    }
+    
+    // 删除重复定义的setupStateListener方法
+    // 设置状态监听器，监听其他玩家的队伍变化
+    // （此方法已在上方定义，保留上方的正确实现）
+
+    // 更新远程用户的队伍显示
+    updateRemoteUserTeam(userId, team, username, avatar) {
+        // 先移除旧元素
+        this.removeRemoteUser(userId);
+    
+        // 如果没有队伍信息，不添加
+        if (!team || !username || !avatar) return;
+    
+        // 修复头像路径，确保不会重复添加.png扩展名
+        const avatarFileName = avatar || '1.png';
+        const avatarPath = avatarFileName.includes('.png') ? `home/${avatarFileName}` : `home/${avatarFileName}.png`;
+    
+        // 创建用户信息元素
+        const userInfo = document.createElement('div');
+        userInfo.className = `user-team-info ${team}`;
+        userInfo.dataset.userId = userId;
+        userInfo.innerHTML = `
+            <img src="${avatarPath}" alt="${username}" class="user-team-avatar">
+            <div class="user-team-name">${username}</div>
+        `;
+    
+        // 添加到对应队伍区域的标题上方
+        const teamSection = document.getElementById(`${team}-team-section`);
+        if (teamSection) {
+            const teamTitle = teamSection.querySelector('.team-title');
+            if (teamTitle) {
+                teamSection.insertBefore(userInfo, teamTitle);
+            } else {
+                teamSection.prepend(userInfo);
+            }
+        }
+    }
+
+    // 移除远程用户显示
+    removeRemoteUser(userId) {
+        const userElements = document.querySelectorAll(`.user-team-info[data-user-id="${userId}"]`);
+        userElements.forEach(el => el.remove());
+    }
+
+    // 更新本地队伍信息并同步
+    updateTeam(team) {
+        this.currentTeam = team;
+        localStorage.setItem('team', team);
+
+        if (this.usersRef) {
+            const userRef = this.usersRef.child(this.userId);
+            userRef.update({
+                team: team
+            });
+        }
+
+        // 更新本地显示
+        if (this.usernameManager) {
+            this.usernameManager.displayUserTeamInfo();
         }
     }
 }
