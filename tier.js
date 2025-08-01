@@ -25,7 +25,7 @@ const tierPokemons = {
     ],
     // 可以继续添加其他分级
     uber: [
-                'annihilape', 'arceus', 'archaludon', 'baxcalibur', 'calyrex-ice', 'chien-pao', 'chi-yu',
+        'annihilape', 'arceus', 'archaludon', 'baxcalibur', 'calyrex-ice', 'chien-pao', 'chi-yu',
         'deoxys', 'deoxys-attack', 'dialga', 'dialga-origin',
         'espathra', 'eternatus',
         'flutter mane',
@@ -43,12 +43,21 @@ const tierPokemons = {
         'volcarona',
         'zacian', 'zacian-crowned', 'zamazenta-crowned', 'zekrom'
     ],
-    自定义: [
+    第一赛段: [
        'gigalith', 'sandslash', 'poliwrath', 'lanturn',
                     'pelipper', 'escavalier', 'amoonguss', 'chesnaught', 'ampharos-Mega',
                     'crawdaunt', 'lucario', 'flygon', 'articuno',
                     'tapu-bulu', '', 'hoopa',"meloetta-aria","ampharos-mega","ninetales","darmanitan-standard","zarude","glimmora","slowbro","primarina",
                     "pidgeot-mega","forretress","charizard","goodra","aerodactyl","golisopod","staraptor","moltres-galar"
 
+    ],
+
+    第二赛段: [
+        'keldeo-ordinary', 'aegislash-shield', 'sableye-mega', 'corviknight', 'volcanion', 
+        'jellicent', 'tornadus-therian', 'slowking-galar', 'greninja', 'iron-crown', 
+        'tapu-fini', 'articuno', 'terrakion', 'manectric-mega', 'golisopod', 'sandy-shocks', 'tangrowth',
+        'magnezone', 'azelf', 'gallade-mega', 'mimikyu-totem-disguised', 'haxorus', 'hoopa-unbound', 'blacephalon'
+        ,'clodsire','bewear','nihilego','buzzwole',
+        'salamence','infernape'
     ]
 };
