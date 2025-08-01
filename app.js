@@ -1,3 +1,4 @@
+
 // 颜色映射
 const typeColors = {
     normal: '#A8A878',
@@ -310,34 +311,6 @@ class BPManager {
         return JSON.stringify(config, null, 2);
     }
     
-    importConfig(configStr) {
-        try {
-            const config = JSON.parse(configStr);
-            
-            this.phase = config.phase || 'red-ban';
-            this.remainingBans = config.remainingBans || this.totalBans;
-            this.currentPhaseIndex = config.currentPhaseIndex || 0;
-            
-            this.redTeam = config.redTeam 
-                ? config.redTeam.map(id => this.allPokemon.find(p => p.id === id)).filter(Boolean)
-                : [];
-            
-            this.blueTeam = config.blueTeam 
-                ? config.blueTeam.map(id => this.allPokemon.find(p => p.id === id)).filter(Boolean)
-                : [];
-            
-            this.bannedPokemon = config.bannedPokemon 
-                ? config.bannedPokemon.map(id => this.allPokemon.find(p => p.id === id)).filter(Boolean)
-                : [];
-            
-            this.updatePhase();
-            this.updateUI();
-            return true;
-        } catch (e) {
-            console.error('导入配置失败:', e);
-            return false;
-        }
-    }
     
     getSuggestedPokemon() {
         const opponentTeam = this.currentTeam === 'red' ? this.blueTeam : this.redTeam;
@@ -867,6 +840,11 @@ transformPokemonData(apiData) {
         this.elements.suggestBtn.addEventListener('click', () => this.showSuggestionModal());
         
         this.elements.exportBtn.addEventListener('click', () => {
+            // 创建浮窗元素前先移除已存在的浮窗
+            const existingWindow = document.querySelector('.export-window');
+            if (existingWindow) {
+                document.body.removeChild(existingWindow);
+            }
             // 创建浮窗元素
             const exportWindow = document.createElement('div');
             exportWindow.className = 'export-window';
@@ -880,7 +858,11 @@ transformPokemonData(apiData) {
                                 <div>${p.name}</div>
                             </div>
                         `).join('')}</div>
-                        <div class="vs">VS</div>
+                        <div class="vs-controls">
+                            <button class="copy-btn red">导出</button>
+                            <div class="vs">VS</div>
+                            <button class="copy-btn blue">导出</button>
+                        </div>
                         <div class="blue-team">${this.bpManager.blueTeam.map(p => `
                             <div class="simple-pokemon">
                                 <img src="${p.image}" alt="${p.name}">
@@ -902,6 +884,60 @@ transformPokemonData(apiData) {
                 if (e.target === exportWindow) {
                     document.body.removeChild(exportWindow);
                 }
+            });
+            
+            // 为红色复制按钮添加点击事件监听器
+            const redCopyBtn = exportWindow.querySelector('.copy-btn.red');
+            redCopyBtn.addEventListener('click', () => {
+                // 获取红色方队伍的精灵
+                const redTeam = this.bpManager.redTeam;
+                
+                // 提取精灵英文名称（保持原始大小写）
+                const pokemonNames = redTeam.map(p => p.englishName);
+                
+                // 查找对应的精灵数据并拼接
+                // 使用staff.js中的全局pokemonData变量
+                const copyText = pokemonNames
+                    .filter(name => pokemonData && pokemonData[name.toLowerCase()])
+                    .map(name => pokemonData[name.toLowerCase()])
+                    .join('\n\n');
+                
+                // 复制到剪贴板
+                navigator.clipboard.writeText(copyText).then(() => {
+                    alert('红色队伍数据已复制！请粘贴到队伍中！');
+                    // 复制成功后跳转到指定网站
+                    window.open('https://play.pokemonshowdown.com/teambuilder', '_blank');
+                }).catch(err => {
+                    console.error('无法复制内容: ', err);
+                    alert('复制失败，请手动复制');
+                });
+            });
+            
+            // 为蓝色复制按钮添加点击事件监听器
+            const blueCopyBtn = exportWindow.querySelector('.copy-btn.blue');
+            blueCopyBtn.addEventListener('click', () => {
+                // 获取蓝色方队伍的精灵
+                const blueTeam = this.bpManager.blueTeam;
+                
+                // 提取精灵英文名称（保持原始大小写）
+                const pokemonNames = blueTeam.map(p => p.englishName);
+                
+                // 查找对应的精灵数据并拼接
+                // 使用staff.js中的全局pokemonData变量
+                const copyText = pokemonNames
+                    .filter(name => pokemonData && pokemonData[name.toLowerCase()])
+                    .map(name => pokemonData[name.toLowerCase()])
+                    .join('\n\n');
+                
+                // 复制到剪贴板
+                navigator.clipboard.writeText(copyText).then(() => {
+                    alert('蓝色队伍数据已复制！请粘贴到队伍中！');
+                    // 复制成功后跳转到指定网站
+                    window.open('https://play.pokemonshowdown.com/teambuilder', '_blank');
+                }).catch(err => {
+                    console.error('无法复制内容: ', err);
+                    alert('复制失败，请手动复制');
+                });
             });
         });
         
