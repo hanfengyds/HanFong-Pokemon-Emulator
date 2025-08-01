@@ -75,9 +75,9 @@ Adamant Nature
 - Outrage`,
 
 ['sableye-mega']:`Sableye-Mega @ Sablenite  
-Ability: PranTera 
-Type: Dark  
-EVs: 248 HP / 8 Def / 252 SpD  
+Ability: Magic Bounce  
+Tera Type: Dark  
+EVs: 248 HP / 56 Def / 204 SpD  
 Careful Nature  
 - Knock Off  
 - Will-O-Wisp  
