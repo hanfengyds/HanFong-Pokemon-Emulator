@@ -96,7 +96,8 @@
                             <option value="ou">【Gen9】OverUsed</option>
                             <option value="uubl">【Gen9】UUBL </option>
                             <option value="uu">【Gen9】UnderUsed</option>
-                            <option value="自定义">第一赛段</option>
+                            <option value="第一赛段">第一赛段</option>
+                            <option value="第二赛段">第二赛段</option>
                         </select>
                         <select id="sort-filter" class="filter-select">
                             <option value="id">编号排序</option>
@@ -129,10 +130,10 @@
                         <i class="fas fa-lightbulb"></i> 队伍建议
                     </button>
                     <button class="control-btn" id="export-btn">
-                        <i class="fas fa-file-export"></i> 双方队伍
+                        <i class="fas fa-file-export"></i> 队伍导出
                     </button>
                     <button class="control-btn" id="import-btn">
-                        <i class="fas fa-file-import"></i> 数据导入
+                        <i class="fas fa-bell"></i> 更新公告
                     </button>
                     <!-- 多人聊天按钮 -->
                     <button class="control-btn" id="collaborate-btn">
@@ -233,7 +234,25 @@
         </div>
     </div>
     
-    <!-- 导入配置弹窗 -->
+    <!-- 更新公告弹窗 -->
+    <div class="pokemon-details announcement-modal" id="import-modal">
+        <span class="close-details">&times;</span>
+        <h2 style="text-align: center;font-size: 40px;">系统公告</h2>
+        <div style="padding: 15px; line-height: 1.6;">
+            <div class="system-announcement">
+                <h3>第二赛段改动</h3>
+                <ul>
+                    <li><img src="home/144.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">急冻鸟：新增特性【魔法防守】</li>         
+                    <li><img src="home/639.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">代拉基翁：新增特性【结实】</li>
+                    <li><img src="home/462.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">自爆磁怪：新增特性【漂浮】</li>
+                    <li><img src="home/475M.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">Mega艾路雷朵：新增特性【锋锐】</li>
+                    <li><img src="home/647.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">凯路迪欧：新增特性【技术高手】</li>
+                    <li><img src="home/760.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">穿着熊：新增特性【胆量】</li>
+                    <li><img src="home/768.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">具甲武者：新增技能【快速折返】</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="pokemon-details" id="import-modal">
         <span class="close-details">&times;</span>
         <h2>导入BP配置</h2>
@@ -278,6 +297,7 @@
 </div>
 
     <script src="tier.js"></script>
+    <script src="staff.js"></script>
     <script src="app.js"></script>
     <script src="multiplayer.js"></script>
     <script src="username.js"></script>
