@@ -128,7 +128,8 @@ class UsernameManager {
         avatarGrid.innerHTML = ''; // 清空现有内容
 
         // 直接使用带扩展名的完整文件名
-        const availableAvatars = ['4.png', '36.png', '79.png', '94.png',
+        const availableAvatars = ['0.1.png','0.2.png','0.3.png','0.4.png','0.5.png','0.6.png','0.7.png','0.8.png','0.9.png','0.10.png',
+            '0.11.png','0.12.png','0.13.png','0.14.png','0.15.png','0.16.png','0.17.png','0.8.png','0.19.png','0.20.png','0.png',
              '143.png', '212.png', '306M.png','330.png','383P.png','382P.png',
              '964HERO.png','328.png','77G.png',
              '25Ca1.png','445.png','802.png','48.png','359M.png','231.png'];
