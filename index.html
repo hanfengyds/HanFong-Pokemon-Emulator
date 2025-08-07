@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>宝可梦BP对战系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -12,7 +12,12 @@
     
 </head>
 <body>
-    <!-- 原有所有HTML内容保持不变 -->
+    <div class="landscape-warning"> 
+        <i class="fas fa-rotate"></i> 
+        <h2>请将手机横屏以获得最佳体验</h2> 
+        <p>宝可梦BP对战系统需要更宽的屏幕空间来显示所有内容</p> 
+        <button id="force-landscape">强制横屏</button> 
+    </div>
     <div class="container">
         <!-- 头部区域 -->
         <div class="header">
@@ -140,13 +145,7 @@
                     <!-- 多人聊天按钮 -->
                     <button class="control-btn" id="collaborate-btn">
                         <i class="fas fa-users"></i> 多人聊天
-                    </button>
-                    <button class="control-btn" id="red-team-toggle" style="background-color: var(--red-team-color);">
-                        <i class="fas fa-chevron-right"></i> 红队面板
-                    </button>
-                    <button class="control-btn" id="blue-team-toggle" style="background-color: var(--blue-team-color);">
-                        <i class="fas fa-chevron-left"></i> 蓝队面板
-                    </button>
+                    </button>      
                 </div>
             </div>
             
