@@ -72,7 +72,7 @@ class UsernameManager {
                         </div>
                     </div>
 
-                    <input type="text" id="username-input" maxlength="20" value="${this.username}" placeholder="输入用户名">
+                    <input type="text" id="username-input" maxlength="20" value="${this.username}" placeholder="输入pokemonshowdown同名ID">
 
                     <div class="modal-buttons">
                         <button id="confirm-username">确认</button>
@@ -129,7 +129,8 @@ class UsernameManager {
 
         // 直接使用带扩展名的完整文件名
         const availableAvatars = ['0.1.png','0.2.png','0.3.png','0.4.png','0.5.png','0.6.png','0.7.png','0.8.png','0.9.png','0.10.png',
-            '0.11.png','0.12.png','0.13.png','0.14.png','0.15.png','0.16.png','0.17.png','0.8.png','0.19.png','0.20.png','0.png',
+             '0.11.png','0.12.png','0.13.png','0.14.png','0.15.png','0.16.png','0.17.png','0.8.png','0.19.png','0.20.png','0.png',
+              '0.21.png','0.22.png','0.23.png','0.24.png','0.25.png','0.26.png','0.27.png','0.28.png','0.29.png','0.30.png',
              '143.png', '212.png', '306M.png','330.png','383P.png','382P.png',
              '964HERO.png','328.png','77G.png',
              '25Ca1.png','445.png','802.png','48.png','359M.png','231.png'];
