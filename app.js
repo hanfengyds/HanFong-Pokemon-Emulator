@@ -49,7 +49,7 @@ function initPokemonApp() {
 
 // 宝可梦图像URL生成函数
 function getPokemonImageUrl(id) {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+    return `official-artwork/${id}.png`;
 }
 
 // BP管理器
@@ -895,18 +895,19 @@ transformPokemonData(apiData) {
                 // 提取精灵英文名称（保持原始大小写）
                 const pokemonNames = redTeam.map(p => p.englishName);
                 
-                // 查找对应的精灵数据并拼接
-                // 使用staff.js中的全局pokemonData变量
+                // 查找对应的精灵数据并拼接，添加容错机制
                 const copyText = pokemonNames
-                    .filter(name => pokemonData && pokemonData[name.toLowerCase()])
-                    .map(name => pokemonData[name.toLowerCase()])
+                    .map(name => {
+                        if (pokemonData && pokemonData[name.toLowerCase()]) {
+                            return pokemonData[name.toLowerCase()];
+                        }
+                        return name;
+                    })
                     .join('\n\n');
                 
                 // 复制到剪贴板
                 navigator.clipboard.writeText(copyText).then(() => {
                     alert('红色队伍数据已复制！请粘贴到队伍中！');
-                    // 复制成功后跳转到指定网站
-                    window.open('https://play.pokemonshowdown.com/teambuilder', '_blank');
                 }).catch(err => {
                     console.error('无法复制内容: ', err);
                     alert('复制失败，请手动复制');
@@ -922,18 +923,19 @@ transformPokemonData(apiData) {
                 // 提取精灵英文名称（保持原始大小写）
                 const pokemonNames = blueTeam.map(p => p.englishName);
                 
-                // 查找对应的精灵数据并拼接
-                // 使用staff.js中的全局pokemonData变量
+                // 查找对应的精灵数据并拼接，添加容错机制
                 const copyText = pokemonNames
-                    .filter(name => pokemonData && pokemonData[name.toLowerCase()])
-                    .map(name => pokemonData[name.toLowerCase()])
+                    .map(name => {
+                        if (pokemonData && pokemonData[name.toLowerCase()]) {
+                            return pokemonData[name.toLowerCase()];
+                        }
+                        return name;
+                    })
                     .join('\n\n');
                 
                 // 复制到剪贴板
                 navigator.clipboard.writeText(copyText).then(() => {
                     alert('蓝色队伍数据已复制！请粘贴到队伍中！');
-                    // 复制成功后跳转到指定网站
-                    window.open('https://play.pokemonshowdown.com/teambuilder', '_blank');
                 }).catch(err => {
                     console.error('无法复制内容: ', err);
                     alert('复制失败，请手动复制');
