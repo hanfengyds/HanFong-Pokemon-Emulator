@@ -75,9 +75,9 @@ Adamant Nature
 - Outrage`,
 
 ['sableye-mega']:`Sableye-Mega @ Sablenite  
-Ability: Magic Bounce  
-Tera Type: Dark  
-EVs: 248 HP / 56 Def / 204 SpD  
+Ability: PranTera 
+Type: Dark  
+EVs: 248 HP / 8 Def / 252 SpD  
 Careful Nature  
 - Knock Off  
 - Will-O-Wisp  
@@ -392,4 +392,309 @@ Jolly Nature
 - Swords Dance  
 - Sacred Sword  
 - Psycho Cut`,
+
+//RU残奥会
+wyrdeer:`Wyrdeer @ Assault Vest  
+Ability: Psychic Surge  
+Tera Type: Normal  
+EVs: 252 HP / 236 SpD / 20 Spe  
+Calm Nature  
+IVs: 0 Atk  
+- Expanding Force  
+- Earth Power  
+- Shadow Ball  
+- Future Sight`, 
+
+electivire:`Electivire @ Life Orb  
+Ability: Flash Fire  
+EVs: 252 Atk / 252 SpA / 4 SpD  
+Serious Nature  
+- Flamethrower  
+- Volt Switch  
+- Knock Off  
+- Thunderclap`,
+
+['mimikyu-totem-disguised']:`Mimikyu @ Red Card  
+Ability: Disguise  
+Tera Type: Ghost  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Play Rough  
+- Shadow Claw  
+- Swords Dance  
+- Shadow Sneak`,
+
+magmortar:`Magmortar
+[Volt Absorb] @ Heavy-Duty Boots
+- Taunt
+- Searing Shot
+- Scorching Sands
+- Focus Blast
+EVs: - Atk / 252 SpA / 4 SpD / 252+ Spe (Timid)
+IVs: 0 Atk
+Tera Type: Fire`,
+
+['golem-alola']:`Golem-Alola
+[Earth Eater] @ Magnet
+- Double-Edge
+- Earthquake
+- Stone Edge
+- Stealth Rock
+EVs: 252 HP / 252+ Atk / - SpA / 4 SpD (Adamant)
+IVs: 0 Def
+Tera Type: Rock`,
+
+crobat:`Crobat @ Choice Band  
+Ability: Poison Touch  
+Tera Type: Poison  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Noxious Torque  
+- U-turn  
+- Poison Fang  
+- Brave Bird  `,
+
+['weezing-galar']:`Weezing-Galar@ Rocky Helmet  
+Ability: Levitate  
+Tera Type: Poison  
+EVs: 252 Atk / 252 Def / 4 SpA  
+Relaxed Nature  
+- Clear Smog  
+- Gunk Shot  
+- Play Rough  
+- Explosion  `,
+
+['heracross-mega'] :`Heracross-Mega@ Heracronite  
+Ability: Skill Link  
+Tera Type: Bug  
+EVs: 252 HP / 252 Atk / 4 Def  
+Adamant Nature  
+- Close Combat  
+- Bulk Up  
+- Trailblaze  
+- Rock Blast  `,
+
+['steelix-mega']: `Steelix-Mega @ Steelixite  
+Ability: Sand Force  
+EVs: 252 HP / 252 Atk / 4 SpD  
+Brave Nature  
+IVs: 0 Spe  
+- Earthquake  
+- Gyro Ball  
+- Stealth Rock  
+- Stone Edge`,
+
+['electrode-hisui']:`@ Life Orb  
+Ability: Rock Head  
+Tera Type: Electric  
+EVs: 72 HP / 184 SpA / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Chloroblast  
+- Leech Seed  
+- Substitute  
+- Thunder Wave  `,
+
+incineroar:`Incineroar @ Heavy-Duty Boots  
+Ability: Intimidate  
+Tera Type: Fire  
+EVs: 252 HP / 164 Atk / 92 SpD  
+Adamant Nature  
+- Flare Blitz  
+- Knock Off  
+- Will-O-Wisp  
+- Parting Shot`,
+
+primarina:`Primarina @ Assault Vest  
+Ability: Liquid Voice  
+Tera Type: Water  
+EVs: 252 HP / 4 Def / 252 SpA  
+Modest Nature  
+IVs: 0 Atk  
+- Hyper Voice  
+- Moonblast  
+- Ice Beam  
+- Energy Ball`,
+
+['decidueye-hisui']:`Decidueye-Hisui @ Flyinium Z  
+Ability: Scrappy  
+Tera Type: Grass  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Adamant Nature  
+- Triple Arrows  
+- Leaf Blade  
+- Triple Axel  
+- Tailwind`,
+
+['zoroark-gisui']:`Zoroark-Hisui @ Choice Specs  
+Ability: Illusion  
+Tera Type: Normal  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Bitter Malice  
+- Hyper Voice  
+- Curse  
+- Trick`,
+
+krookodile:`Krookodile @ Life Orb  
+Ability: Moxie  
+Tera Type: Ground  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Earthquake  
+- Knock Off  
+- Scale Shot  
+- Stealth Rock`,
+
+['abomasnow-mega']:`Abomasnow-Mega @ Abomasite  
+Ability: Snow Warning  
+Tera Type: Grass  
+- Avalanche  
+- Wood Hammer  
+- Ice Shard  
+- Aurora Veil`,
+
+cryogonal:`Cryogonal @ Heavy-Duty Boots  
+Ability: Magic Bounce  
+Tera Type: Ice  
+EVs: 248 HP / 8 SpA / 252 Spe  
+Timid Nature  
+- Freeze-Dry  
+- Rapid Spin  
+- Recover  
+- Chilly Reception`,
+
+toedscruel:`Toedscruel @ Leftovers  
+Ability: Mycelium Might  
+Tera Type: Ground  
+EVs: 252 HP / 4 SpA / 252 SpD  
+Calm Nature  
+- Spikes  
+- Knock Off  
+- Leaf Storm  
+- Rapid Spin`,
+
+['ninetales-alola']:`Ninetales-Alola @ Light Clay  
+Ability: Snow Warning  
+Tera Type: Ice  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Freeze-Dry  
+- Aurora Veil  
+- Encore  
+- Dazzling Gleam`,
+
+dhelmise:`Dhelmise @ Life Orb  
+Ability: Adaptability  
+EVs: 248 HP / 252 Atk / 8 SpD  
+IVs: 0 Spe  
+- Wood Hammer  
+- Poltergeist  
+- Gyro Ball  
+- Liquidation`,
+
+slowking:`Slowking @ Leftovers  
+Ability: Regenerator  
+Tera Type: Water  
+EVs: 252 HP / 252 SpA / 4 SpD  
+Quiet Nature  
+IVs: 0 Atk  
+- Trick Room  
+- Future Sight  
+- Scald  
+- Blizzard`,
+
+durant:`Durant @ Choice Band  
+Ability: Hustle  
+Tera Type: Bug  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- First Impression  
+- Iron Head  
+- X-Scissor  
+- Stone Edge`,
+
+tentacruel:`Tentacruel @ Black Sludge  
+Ability: Rain Dish  
+Tera Type: Water  
+EVs: 252 HP / 240 SpD / 16 Spe  
+Calm Nature  
+- Acid Armor  
+- Hydro Pump  
+- Flip Turn  
+- Rapid Spin`,
+
+mandibuzz:`Mandibuzz (F) @ Leftovers  
+Ability: Overcoat  
+Tera Type: Dark  
+EVs: 140 Atk / 112 Def / 4 SpD / 252 Spe  
+Jolly Nature  
+- Foul Play  
+- Defog  
+- Brave Bird  
+- U-turn`,
+
+quagsire:`Quagsire @ Leftovers  
+Ability: Water Absorb  
+Tera Type: Water  
+EVs: 252 HP / 4 Atk / 252 Def  
+Impish Nature  
+- High Horsepower  
+- Liquidation  
+- Recover  
+- Toxic`,
+
+bruxish:`Bruxish @ Choice Scarf  
+Ability: Dazzling  
+Tera Type: Water  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Flip Turn  
+- Iron Tail  
+- Liquidation  
+- Psychic Fangs`,
+
+flygon:`Flygon @ Choice Scarf  
+Ability: Tinted Lens  
+Tera Type: Ground  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Dragon Claw  
+- Earthquake  
+- Steel Wing  
+- U-turn`,
+
+jellicent:`Jellicent @ Leftovers  
+Ability: Wandering Spirit  
+Tera Type: Water  
+EVs: 252 HP / 4 SpA / 252 SpD  
+Calm Nature  
+IVs: 0 Atk  
+- Acid Armor  
+- Blizzard  
+- Energy Ball  
+- Recover`,
+
+sneasel:`Sneasel @ Life Orb  
+Ability: Technician  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Ice Shard  
+- Fake Out  
+- Knock Off  
+- Triple Axel`,  
+
+bronzong:`Bronzong @ Leftovers  
+Ability: Heatproof  
+Tera Type: Steel  
+EVs: 4 HP / 252 SpA / 252 SpD  
+Modest Nature  
+IVs: 0 Atk  
+- Calm Mind  
+- Future Sight  
+- Body Press  
+- Stored Power`,
+
 };
