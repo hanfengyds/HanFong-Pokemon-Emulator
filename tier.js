@@ -59,5 +59,12 @@ const tierPokemons = {
         'magnezone', 'azelf', 'gallade-mega', 'mimikyu-totem-disguised', 'haxorus', 'hoopa-unbound', 'blacephalon'
         ,'clodsire','bewear','nihilego','buzzwole',
         'salamence','infernape'
+    ],
+    RU残奥会:[
+      'incineroar','primarina','krookodile','abomasnow-mega','cryogonal','toedscruel',
+      'ninetales-alola','zoroark-hisui','decidueye-hisui','dhelmise','crobat','weezing-galar',
+      'heracross-mega','steelix-mega','electrode-hisui','electivire','magmortar','wyrdeer','mimikyu-totem-disguised',
+      'golem-alola','slowking','durant','tentacruel','quagsire','bruxish',
+      'bronzong','sneasel','flygon','jellicent','mandibuzz'
     ]
 };
