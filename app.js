@@ -454,8 +454,39 @@ class PokemonBPApp {
         this.setupEventListeners();
         this.loadPokemonData();
         this.abilityIdToFileNumber = {}; // 添加此行
+
+        // 添加横屏检测和锁定逻辑
+        this.orientationLockElement = document.querySelector('.landscape-warning');
+        this.forceLandscapeButton = document.getElementById('force-landscape');
+        this.checkOrientation();
+        window.addEventListener('resize', () => this.checkOrientation());
+        window.addEventListener('orientationchange', () => this.checkOrientation());
+        if (this.forceLandscapeButton) {
+            this.forceLandscapeButton.addEventListener('click', () => this.lockLandscape());
+        }
     }
-    
+
+    // 添加检查屏幕方向的方法
+    checkOrientation() {
+        if (window.innerWidth < window.innerHeight) {
+            if (this.orientationLockElement) {
+                this.orientationLockElement.style.display = 'flex';
+            }
+        } else {
+            if (this.orientationLockElement) {
+                this.orientationLockElement.style.display = 'none';
+            }
+        }
+    }
+
+    // 添加锁定横屏的方法
+    lockLandscape() {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape').catch((error) => {
+                console.error('无法锁定屏幕方向:', error);
+            });
+        }
+    }
     initElements() {
         this.elements = {
             pokemonGrid: document.getElementById('pokemon-grid'),
@@ -469,10 +500,6 @@ class PokemonBPApp {
             suggestBtn: document.getElementById('suggest-btn'),
             exportBtn: document.getElementById('export-btn'),
             importBtn: document.getElementById('import-btn'),
-            redTeamToggle: document.getElementById('red-team-toggle'),
-            blueTeamToggle: document.getElementById('blue-team-toggle'),
-            redTeamSection: document.getElementById('red-team-section'),
-            blueTeamSection: document.getElementById('blue-team-section'),
             pokemonDetails: document.getElementById('pokemon-details'),
             importModal: document.getElementById('import-modal'),
             suggestionModal: document.getElementById('suggestion-modal'),
@@ -969,16 +996,7 @@ transformPokemonData(apiData) {
             });
         });
         
-        this.elements.redTeamToggle.addEventListener('click', () => {
-            this.elements.redTeamSection.classList.add('active');
-            this.elements.blueTeamSection.classList.remove('active');
-        });
-        
-        this.elements.blueTeamToggle.addEventListener('click', () => {
-            this.elements.blueTeamSection.classList.add('active');
-            this.elements.redTeamSection.classList.remove('active');
-        });
-        
+          
         document.getElementById('suggested-pokemon').addEventListener('click', (e) => {
             const card = e.target.closest('.pokemon-card');
             if (card) {
