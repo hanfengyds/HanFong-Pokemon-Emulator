@@ -459,6 +459,8 @@ class PokemonBPApp {
         this.orientationLockElement = document.querySelector('.landscape-warning');
         this.forceLandscapeButton = document.getElementById('force-landscape');
         this.checkOrientation();
+        // 尝试初始锁定横屏
+        this.tryLockLandscape();
         window.addEventListener('resize', () => this.checkOrientation());
         window.addEventListener('orientationchange', () => this.checkOrientation());
         if (this.forceLandscapeButton) {
@@ -466,12 +468,13 @@ class PokemonBPApp {
         }
     }
 
-    // 添加检查屏幕方向的方法
+    // 修改检查屏幕方向的方法
     checkOrientation() {
         if (window.innerWidth < window.innerHeight) {
             if (this.orientationLockElement) {
                 this.orientationLockElement.style.display = 'flex';
             }
+            this.tryLockLandscape();
         } else {
             if (this.orientationLockElement) {
                 this.orientationLockElement.style.display = 'none';
@@ -479,13 +482,24 @@ class PokemonBPApp {
         }
     }
 
-    // 添加锁定横屏的方法
-    lockLandscape() {
-        if (screen.orientation && screen.orientation.lock) {
+    // 添加尝试锁定横屏的方法，增强兼容性
+    tryLockLandscape() {
+        if (typeof screen.orientation !== 'undefined' && screen.orientation.lock) {
             screen.orientation.lock('landscape').catch((error) => {
                 console.error('无法锁定屏幕方向:', error);
             });
+        } else if (typeof screen.lockOrientation !== 'undefined') {
+            screen.lockOrientation('landscape');
+        } else if (typeof screen.mozLockOrientation !== 'undefined') {
+            screen.mozLockOrientation('landscape');
+        } else if (typeof screen.msLockOrientation !== 'undefined') {
+            screen.msLockOrientation('landscape');
         }
+    }
+
+    // 修改锁定横屏的方法
+    lockLandscape() {
+        this.tryLockLandscape();
     }
     initElements() {
         this.elements = {
