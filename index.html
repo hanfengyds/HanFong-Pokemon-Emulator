@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=2.5, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=2.5, user-scalable=yes">
     <title>宝可梦BP对战系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +15,7 @@
     <div class="landscape-warning"> 
         <i class="fas fa-rotate"></i> 
         <h2>请将手机横屏以获得最佳体验</h2> 
-        <p>宝可梦BP对战系统需要更宽的屏幕空间来显示所有内容</p> 
+        <p>宝可梦BP对战系统需要更宽的屏幕空间</p> 
     </div>
     <div class="container">
         <!-- 头部区域 -->
@@ -104,6 +104,7 @@
                             <option value="第二赛段">第二赛段</option>
                             <option value="RU残奥会">RU残奥会(玩家投稿)
                             </option>
+                            <option value="第三赛段">第三赛段（16强）</option>
                         </select>
                         <select id="sort-filter" class="filter-select">
                             <option value="id">编号排序</option>
@@ -237,35 +238,21 @@
     <!-- 更新公告弹窗 -->
     <div class="pokemon-details announcement-modal" id="import-modal">
         <span class="close-details">&times;</span>
-        <h2 style="text-align: center;font-size: 40px;">系统公告</h2>
+        <img src="ui/04.png" alt="公告头部图片" style="width: 100%; object-fit: cover;">
+        <img src="ui/01.png" alt="公告头部图片" style="width: 100%; object-fit: cover;">
+        <h2 style="text-align: center;font-size: 40px;">-2025年竞技场-</h2>
         <div style="padding: 15px; line-height: 1.6;">
             <div class="system-announcement">
-                <h3>特殊赛段改动</h3>
-                 <li>>新增【发起挑战】功能：点击对方的用户名栏，即可拉起对战窗口</li>    
-                 <li>>优化了精灵的加载方式</li>
-                 <li>>新增【RU残奥会】玩家投稿卡池，点击导出，自动复制精灵配置，无须手动调配</li>            
-               <h3>RU残奥会改动（特性）</h3>
-                    <li><img src="home/781.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">破破舵轮：新增特性【适应力】<?P>         
-                    <li><img src="home/330.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">沙漠蜻蜓：新增特性【有色眼镜】<?P>
-                    <li><img src="home/169.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">叉字蝠：新增特性【毒手】<?P>
-                    <li><img src="home/899.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">诡角鹿：新增特性【精神制造者】</li>  
-                    <li><img src="home/76A.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">隆隆岩(阿罗拉)：新增特性【食土】</li>
-                    <li><img src="home/101H.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">顽皮雷弹(洗翠)：新增特性【坚硬脑袋】</li>
-                    <li><img src="home/615.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">几何雪花：新增特性【魔法镜】</li>
-                    <li><img src="home/466.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">电击魔兽：新增特性【引火】</li>          
-                    <li><img src="home/467.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">鸭嘴炎兽：新增特性【蓄电】</li>
-                    <li><img src="home/215.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">狃拉：新增特性【技术高手】</li>
-                 
-                    <h3>RU残奥会改动（招式）</h3>   
-                    
-                    <li><img src="home/615.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">几何雪花：新增招式【冷笑话】</li>
-                    <li><img src="home/467.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">鸭嘴炎兽：新增招式【火焰弹】</li>
-                    <li><img src="home/724H.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">狙射树枭(洗翠)：新增招式【音速拳】【三旋击】</li>
-                    <li><img src="home/781.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">破破舵轮：新增招式【木槌】</li>
-                    <li><img src="home/466.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">电击魔兽：新增招式【迅雷】</li>
-                    <li><img src="home/169.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">叉字蝠：新增招式【剧毒暴冲】【撒菱】</li>
-                    <li><img src="home/899.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">诡角鹿：新增招式【丛林治疗】</li>
-            </div>
+                <h3>第三赛段特殊改动</h3>          
+                    <li><img src="home/359M.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">阿勃梭鲁M-新增特性</li>
+                    <li>【灾祸之剑】：除自身外，其他宝可梦，物防减低为原有的0.75</li>
+                    <li><img src="home/130.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">暴鲤龙-新增特性</li>
+                    <li>【飞行皮肤】：一般系招式视为飞行系招式，威力提高1.2</li>
+                    <li><img src="home/807.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">捷拉奥拉-新增特性</li>
+                    <li>【铁拳】：拳击类招式，威力提高1.2</li>
+                    <li><img src="home/466.png" style="width:60px;height:60px;margin-right:8px;vertical-align:middle;">电击魔兽-新增特性</li>
+                    <li>【强子引擎】：出场后开启持续5回合的电气场地，身处场地时，特攻提高1.3</li>
+                </div>
         </div>
     </div>
     <div class="pokemon-details" id="import-modal">
@@ -370,5 +357,18 @@
             }
         });
     </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
+          console.log('Service Worker 注册成功，作用域:', registration.scope);
+        })
+        .catch(error => {
+          console.log('Service Worker 注册失败:', error);
+        });
+    });
+  }
+</script>
 </body>
 </html>
