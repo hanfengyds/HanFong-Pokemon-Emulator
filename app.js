@@ -249,12 +249,12 @@ class BPManager {
         
         const redTeamList = document.getElementById('red-team-list');
         redTeamList.innerHTML = this.redTeam.length === 0 ? 
-            '<div class="empty-message">暂无选择的宝可梦</div>' : 
+            '<div class="empty-message">选择你的搭档</div>' : 
             this.redTeam.map(p => this.createTeamPokemonElement(p, 'red')).join('');
         
         const blueTeamList = document.getElementById('blue-team-list');
         blueTeamList.innerHTML = this.blueTeam.length === 0 ? 
-            '<div class="empty-message">暂无选择的宝可梦</div>' : 
+            '<div class="empty-message">选择你的搭档</div>' : 
             this.blueTeam.map(p => this.createTeamPokemonElement(p, 'blue')).join('');
         
         const redBannedList = document.getElementById('red-banned-list');
@@ -264,11 +264,11 @@ class BPManager {
         const blueBanned = this.bannedPokemon.filter((_, index) => index % 2 === 1);
         
         redBannedList.innerHTML = redBanned.length === 0 ? 
-            '<div class="empty-message">暂无禁用的宝可梦</div>' : 
+            '<div class="empty-message">禁用你的天敌</div>' : 
             redBanned.map(p => this.createBannedPokemonElement(p)).join('');
         
         blueBannedList.innerHTML = blueBanned.length === 0 ? 
-            '<div class="empty-message">暂无禁用的宝可梦</div>' : 
+            '<div class="empty-message">禁用你的天敌</div>' : 
             blueBanned.map(p => this.createBannedPokemonElement(p)).join('');
     }
     
@@ -1014,8 +1014,9 @@ transformPokemonData(apiData) {
         document.getElementById('suggested-pokemon').addEventListener('click', (e) => {
             const card = e.target.closest('.pokemon-card');
             if (card) {
+                // 修改为显示详情浮窗
                 const pokemonId = parseInt(card.dataset.id);
-                this.bpManager.selectPokemon(this.bpManager.allPokemon.find(p => p.id === pokemonId));
+                this.showPokemonDetails(pokemonId);
                 this.elements.suggestionModal.classList.remove('show');
             }
         });
