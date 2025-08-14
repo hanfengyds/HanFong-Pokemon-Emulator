@@ -1,7 +1,7 @@
 :root {
             --red-team-color: #e74c3c;
             --blue-team-color: #3498db;
-            --ban-color: #7f8c8d;
+            --ban-color: #595959;
             --hover-color: #f1c40f;
         }
         
@@ -56,21 +56,31 @@
         .team-section {
             width: 220px;
             padding: 15px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
             display: flex;
             flex-direction: column;
             transition: all 0.3s;
             z-index: 5;
+            position: relative;
+            border-radius: 15px;
+            margin: 10px;
         }
         
-        .red-team {
-            border-right: 4px solid var(--red-team-color);
-        }
-        
-        .blue-team {
-            border-left: 4px solid var(--blue-team-color);
-        }
+.red-team {
+    background: url('ui/red-background.png');
+    background-position: center;
+    background-size: 600px 112%;
+    border: 3px solid #ff4d4d;
+}
+
+.blue-team {
+    background: url('ui/blue-background.png');
+    background-position: center;
+    background-size: 600px 112%;
+    border: 3px solid #4da6ff;
+} 
         
         /* 宝可梦池区域 */
         .pool-section {
@@ -78,14 +88,18 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            background-color: #ecf0f1;
+            background-image: url('ui/background.png');
+            background-position: center;
+            background-size: cover;
+
+            background-blend-mode: overlay;
         }
         
         .pool-container {
     height: 90vh; /* 固定高度为视窗的90% */
     overflow-y: auto; /* 内部垂直滚动 */
     padding: 15px;
-    background-color: #ecf0f1;
+    background-color: transparent;
     /* 移除 flex: 1 */
 }
         
@@ -98,7 +112,7 @@
         }
         
         .pokemon-card {
-            background-color: white;
+            background-color:rgba(255, 255, 255, 0.85);
             border-radius: 10px;
             padding: 10px;
             text-align: center;
@@ -270,12 +284,12 @@
         }
         
         .red-team-pokemon {
-            background-color: rgba(231, 76, 60, 0.1);
+            background-color: rgba(255, 255, 255, 0.75);
             border-left: 3px solid var(--red-team-color);
         }
         
         .blue-team-pokemon {
-            background-color: rgba(52, 152, 219, 0.1);
+            background-color: rgba(255, 255, 255, 0.75);
             border-left: 3px solid var(--blue-team-color);
         }
         
@@ -323,7 +337,7 @@
             align-items: center;
             padding: 6px;
             margin-bottom: 5px;
-            background-color: rgba(149, 165, 166, 0.1);
+            background-color: rgb(255, 255, 255,1);
             border-radius: 4px;
             font-size: 0.8rem;
             opacity: 0.8;
@@ -1062,11 +1076,11 @@
     margin: 15px;
     border-left: 5px solid var(--blue-team-color);
     z-index: 1002;
-    width: 700px; /* 自定义公告弹窗宽度 */
+    width: 480px; /* 自定义公告弹窗宽度 */
 }
 
 .system-announcement h3 {
-    color: var(--blue-team-color);
+    color: #800080; /* 紫色 */
     margin-top: 0;
     border-bottom: 1px solid #ecf0f1;
     padding-bottom: 10px;
@@ -1086,15 +1100,14 @@
 
 .system-announcement li::before {
     content: "•";
-    color: var(--blue-team-color);
+    color: #800080; /* 紫色 */
     font-weight: bold;
     position: absolute;
     left: 0;
 }
-/* 公告弹窗独立样式 */
+/* 大公告窗 */
 .announcement-modal {
-    width: 700px; /* 自定义公告弹窗宽度 */
-    /* 以下是可选的额外样式定制 */
+    width: 600px; /* 自定义公告弹窗宽度 */
     max-width: 100%;
     padding: 30px;
     border-radius: 12px;
@@ -1173,3 +1186,9 @@
     display: none;
 }
 
+.empty-message {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        text-align: center;
+        padding: 10px;
+    }
