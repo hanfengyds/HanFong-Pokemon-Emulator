@@ -18592,7 +18592,7 @@
     },
     {
         "id": 778,
-        "name": "mimikyu-disguised",
+        "name": "mimikyu",
         "image": "official-artwork/778.png",
         "types": [
             "ghost",
@@ -22208,10 +22208,10 @@
         ],
         "is_default": true
     },
-    {
+     {
         "id": 931,
-        "name": "squawkabilly-green-plumage",
-        "image": "official-artwork/931.png",
+        "name": "squawkabilly",
+        "image": "official-artwork/10260.png",
         "types": [
             "normal",
             "flying"
@@ -22231,7 +22231,7 @@
             "hustle",
             "guts"
         ],
-        "is_default": true
+        "is_default": false
     },
     {
         "id": 932,
@@ -26283,144 +26283,6 @@
         "is_default": false
     },
     {
-        "id": 10080,
-        "name": "pikachu-rock-star",
-        "image": "official-artwork/10080.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10081,
-        "name": "pikachu-belle",
-        "image": "official-artwork/10081.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10082,
-        "name": "pikachu-pop-star",
-        "image": "official-artwork/10082.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10083,
-        "name": "pikachu-phd",
-        "image": "official-artwork/10083.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10084,
-        "name": "pikachu-libre",
-        "image": "official-artwork/10084.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10085,
-        "name": "pikachu-cosplay",
-        "image": "official-artwork/10085.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
         "id": 10086,
         "name": "hoopa-unbound",
         "image": "official-artwork/10086.png",
@@ -26607,144 +26469,6 @@
             "gluttony",
             "hustle",
             "thick-fat"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10094,
-        "name": "pikachu-original-cap",
-        "image": "official-artwork/10094.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10095,
-        "name": "pikachu-hoenn-cap",
-        "image": "official-artwork/10095.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10096,
-        "name": "pikachu-sinnoh-cap",
-        "image": "official-artwork/10096.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10097,
-        "name": "pikachu-unova-cap",
-        "image": "official-artwork/10097.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10098,
-        "name": "pikachu-kalos-cap",
-        "image": "official-artwork/10098.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10099,
-        "name": "pikachu-alola-cap",
-        "image": "official-artwork/10099.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
         ],
         "is_default": false
     },
@@ -27761,30 +27485,6 @@
         ],
         "is_default": false
     },
-  
-    {
-        "id": 10144,
-        "name": "mimikyu-totem-disguised",
-        "image": "official-artwork/10144.png",
-        "types": [
-            "ghost",
-            "fairy"
-        ],
-        "stats": {
-            "hp": 55,
-            "attack": 90,
-            "defense": 80,
-            "specialAttack": 50,
-            "specialDefense": 105,
-            "speed": 96
-        },
-        "height": 0.4,
-        "weight": 2.8,
-        "abilities": [
-            "disguise"
-        ],
-        "is_default": false
-    },
     {
         "id": 10146,
         "name": "kommo-o-totem",
@@ -27830,29 +27530,6 @@
         "weight": 80.5,
         "abilities": [
             "soul-heart"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10148,
-        "name": "pikachu-partner-cap",
-        "image": "official-artwork/10148.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
         ],
         "is_default": false
     },
@@ -28069,29 +27746,6 @@
         "is_default": false
     },
     {
-        "id": 10158,
-        "name": "pikachu-starter",
-        "image": "official-artwork/10158.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 45,
-            "attack": 80,
-            "defense": 50,
-            "specialAttack": 75,
-            "specialDefense": 60,
-            "speed": 120
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "is_default": false
-    },
-    {
         "id": 10159,
         "name": "eevee-starter",
         "image": "official-artwork/10159.png",
@@ -28112,29 +27766,6 @@
             "run-away",
             "adaptability",
             "anticipation"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10160,
-        "name": "pikachu-world-cap",
-        "image": "official-artwork/10160.png",
-        "types": [
-            "electric"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "specialAttack": 50,
-            "specialDefense": 50,
-            "speed": 90
-        },
-        "height": 0.4,
-        "weight": 6.0,
-        "abilities": [
-            "static",
-            "lightning-rod"
         ],
         "is_default": false
     },
@@ -30510,81 +30141,6 @@
         "abilities": [
             "commander",
             "storm-drain"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10260,
-        "name": "squawkabilly-blue-plumage",
-        "image": "official-artwork/10260.png",
-        "types": [
-            "normal",
-            "flying"
-        ],
-        "stats": {
-            "hp": 82,
-            "attack": 96,
-            "defense": 51,
-            "specialAttack": 45,
-            "specialDefense": 51,
-            "speed": 92
-        },
-        "height": 0.6,
-        "weight": 2.4,
-        "abilities": [
-            "intimidate",
-            "hustle",
-            "guts"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10261,
-        "name": "squawkabilly-yellow-plumage",
-        "image": "official-artwork/10261.png",
-        "types": [
-            "normal",
-            "flying"
-        ],
-        "stats": {
-            "hp": 82,
-            "attack": 96,
-            "defense": 51,
-            "specialAttack": 45,
-            "specialDefense": 51,
-            "speed": 92
-        },
-        "height": 0.6,
-        "weight": 2.4,
-        "abilities": [
-            "intimidate",
-            "hustle",
-            "sheer-force"
-        ],
-        "is_default": false
-    },
-    {
-        "id": 10262,
-        "name": "squawkabilly-white-plumage",
-        "image": "official-artwork/10262.png",
-        "types": [
-            "normal",
-            "flying"
-        ],
-        "stats": {
-            "hp": 82,
-            "attack": 96,
-            "defense": 51,
-            "specialAttack": 45,
-            "specialDefense": 51,
-            "speed": 92
-        },
-        "height": 0.6,
-        "weight": 2.4,
-        "abilities": [
-            "intimidate",
-            "hustle",
-            "sheer-force"
         ],
         "is_default": false
     },
