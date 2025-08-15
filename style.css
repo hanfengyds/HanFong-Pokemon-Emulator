@@ -189,7 +189,7 @@
         }
         
         .pokemon-card.banned {
-            background-color: #ecf0f1;
+            background-color: rgba(122, 122, 122, 0.5);
             opacity: 0.5;
         }
         
@@ -285,12 +285,10 @@
         
         .red-team-pokemon {
             background-color: rgba(255, 255, 255, 0.75);
-            border-left: 3px solid var(--red-team-color);
         }
         
         .blue-team-pokemon {
             background-color: rgba(255, 255, 255, 0.75);
-            border-left: 3px solid var(--blue-team-color);
         }
         
         .team-pokemon img {
@@ -328,7 +326,7 @@
         }
         
         .banned-title {
-            background-color: #95a5a6;
+            background-color: #817f7f;
             color: white;
         }
         
@@ -685,11 +683,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .export-window-content {
-    background-color: white;
+    background-image: url('ui/team-background.jpeg');
+    background-size: cover;
+    background-position: center;
     padding: 20px;
     border-radius: 10px;
     position: relative;
@@ -1069,7 +1069,7 @@
 }
 /* 系统公告样式 */
 .system-announcement {
-    background-color: #ffffff;
+    background: url('ui/gonggao.jpeg');
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     padding: 20px;
@@ -1077,10 +1077,17 @@
     border-left: 5px solid var(--blue-team-color);
     z-index: 1002;
     width: 480px; /* 自定义公告弹窗宽度 */
+    color: #fff;
+}
+.system-announcement h3,
+.system-announcement li,
+.system-announcement strong {
+     color: #fff;
+    text-shadow: 0 0 2px #000, 0 1px 0 #000, 1px 0 0 #000, 0 -1px 0 #000, -1px 0 0 #000;
 }
 
 .system-announcement h3 {
-    color: #800080; /* 紫色 */
+    color: #ffffff; /* 紫色 */
     margin-top: 0;
     border-bottom: 1px solid #ecf0f1;
     padding-bottom: 10px;
@@ -1096,14 +1103,6 @@
     list-style-type: none;
     padding-left: 10px;
     position: relative;
-}
-
-.system-announcement li::before {
-    content: "•";
-    color: #800080; /* 紫色 */
-    font-weight: bold;
-    position: absolute;
-    left: 0;
 }
 /* 大公告窗 */
 .announcement-modal {
