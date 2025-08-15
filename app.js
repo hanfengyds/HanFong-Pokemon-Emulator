@@ -1,4 +1,3 @@
-
 // 颜色映射
 const typeColors = {
     normal: '#A8A878',
@@ -890,29 +889,39 @@ transformPokemonData(apiData) {
             const exportWindow = document.createElement('div');
             exportWindow.className = 'export-window';
             exportWindow.innerHTML = `
-                <div class="export-window-content">
-                    <button class="close-btn">&times;</button>
-                    <div class="team-container">
-                        <div class="red-team">${this.bpManager.redTeam.map(p => `
-                            <div class="simple-pokemon">
-                                <img src="${p.image}" alt="${p.name}">
-                                <div>${p.name}</div>
-                            </div>
-                        `).join('')}</div>
-                        <div class="vs-controls">
-                            <button class="copy-btn red">导出</button>
-                            <div class="vs">VS</div>
-                            <button class="copy-btn blue">导出</button>
-                        </div>
-                        <div class="blue-team">${this.bpManager.blueTeam.map(p => `
-                            <div class="simple-pokemon">
-                                <img src="${p.image}" alt="${p.name}">
-                                <div>${p.name}</div>
-                            </div>
-                        `).join('')}</div>
-                    </div>
+    <div class="export-window-content">
+        <button class="close-btn">&times;</button>
+        <div class="team-container">
+            <div class="export-red-team">${this.bpManager.redTeam.map(p => `
+                <div class="simple-pokemon">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div>${p.name}</div>
                 </div>
-            `;
+            `).join('')}</div>
+            <div class="vs-controls">
+                <button class="copy-btn red">导出</button>
+                <div class="vs">VS</div>
+                <button class="copy-btn blue">导出</button>
+            </div>
+            <div class="export-blue-team">${this.bpManager.blueTeam.map(p => `
+                <div class="simple-pokemon">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div>${p.name}</div>
+                </div>
+            `).join('')}</div>
+        </div>
+    </div>
+`;
+            // 新增：让导出队伍横向排列
+setTimeout(() => {
+    exportWindow.querySelector('.export-red-team').style.display = 'flex';
+    exportWindow.querySelector('.export-red-team').style.flexDirection = 'row';
+    exportWindow.querySelector('.export-red-team').style.gap = '15px';
+    exportWindow.querySelector('.export-blue-team').style.display = 'flex';
+    exportWindow.querySelector('.export-blue-team').style.flexDirection = 'row';
+    exportWindow.querySelector('.export-blue-team').style.gap = '15px';
+}, 0);
+
             document.body.appendChild(exportWindow);
             
             // 关闭按钮事件
