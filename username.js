@@ -405,13 +405,13 @@ class UsernameManager {
             }
             
             .user-team-info.red {
-                background-color: rgba(231, 76, 60, 0.1);
-                border: 1px solid #e74c3c;
+                background-color: rgba(255, 255, 255, 0.95);
+                border: 2.5px solid #e74c3c;
             }
             
             .user-team-info.blue {
-                background-color: rgba(52, 152, 219, 0.1);
-                border: 1px solid #3498db;
+                background-color: rgba(255, 255, 255, 0.95);
+                border: 2.5px solid #3498db;
             }
             
             .user-team-avatar {
@@ -611,4 +611,3 @@ function initUsernameManager(multiplayerManager) {
     
     return manager;
 }
-
