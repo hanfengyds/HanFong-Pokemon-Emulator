@@ -56,27 +56,27 @@ const tierPokemons = {
         'keldeo-ordinary', 'aegislash-shield', 'sableye-mega', 'corviknight', 'volcanion', 
         'jellicent', 'tornadus-therian', 'slowking-galar', 'greninja', 'iron-crown', 
         'tapu-fini', 'articuno', 'terrakion', 'manectric-mega', 'golisopod', 'sandy-shocks', 'tangrowth',
-        'magnezone', 'azelf', 'gallade-mega', 'mimikyu-totem-disguised', 'haxorus', 'hoopa-unbound', 'blacephalon'
+        'magnezone', 'azelf', 'gallade-mega', 'mimikyu', 'haxorus', 'hoopa-unbound', 'blacephalon'
         ,'clodsire','bewear','nihilego','buzzwole',
         'salamence','infernape'
     ],
     RU残奥会:[ //30
       'incineroar','primarina','krookodile','abomasnow-mega','cryogonal','toedscruel',
       'ninetales-alola','zoroark-hisui','decidueye-hisui','dhelmise','crobat','weezing-galar',
-      'heracross-mega','steelix-mega','electrode-hisui','electivire','magmortar','wyrdeer','mimikyu-totem-disguised',
+      'heracross-mega','steelix-mega','electrode-hisui','electivire','magmortar','wyrdeer','mimikyu',
       'golem-alola','slowking','durant','tentacruel','quagsire','bruxish',
       'bronzong','sneasel','flygon','jellicent','mandibuzz'
     ],
 
-    第三赛段:[
+    第三赛段:[ //37
       'absol-mega','venusaur-mega',//灾兽，妙蛙花
-      'gyarados','rotom-wash','celesteela','latios',//暴鲤龙，洗衣机，铁火辉夜，拉帝欧斯
-      'clefable','cobalion','golisopod','garchomp',//皮可西，勾帕路翁，具甲武者，烈咬陆鲨
-      'landorus-therian','zeraora','ceruledge','raging-bolt',//土地云，捷拉奥拉，苍炎刃鬼，猛雷鼓
+      'gyarados','rotom-wash','celesteela','latios','ting-lu',//暴鲤龙，洗衣机，铁火辉夜，拉帝欧斯，古鼎鹿
+      'clefable','cobalion','golisopod','garchomp','zapdos',//皮可西，勾帕路翁，具甲武者，烈咬陆鲨，闪电鸟
+      'landorus-therian','zeraora','ceruledge','raging-bolt','glimmora',//土地云，捷拉奥拉，苍炎刃鬼，猛雷鼓，晶光花
       'iron-valiant','gholdengo','magearna','moltres','iron-treads',//铁舞者，赛富豪，玛机雅娜，火焰鸟，铁辙迹
       'terapagos-terastal','toxapex','iron-boulder','kartana','heatran',//泰勒巴格斯，超坏星，铁磐岩，纸御剑，席多蓝恩
       'dialga','hawlucha','ogerpon-cornerstone-mask','houndoom-mega','hippowdon',//帝牙卢卡，摔角鹰人，岩砰砰，黑鲁加，河马兽
-      'electivire',//电击魔兽
+      'electivire','magmortar','lilligant-hisui','nidoking','hydrapple'//电击魔兽，鸭嘴炎兽，洗翠群姐，尼多王，密集大蛇
 
 
     ],
