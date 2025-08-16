@@ -21,7 +21,7 @@ Jolly Nature
 - Waterfall  
 - Floaty Fall`,  
 
-Moltres :`Moltres @ Heavy-Duty Boots  
+moltres :`Moltres @ Heavy-Duty Boots  
 Ability: Flame Body  
 Tera Type: Fire  
 EVs: 236 HP / 252 SpA / 20 Spe  
@@ -281,7 +281,7 @@ Hasty Nature
 - Pursuit  
 - Destiny Bond`,  
 
-['ogerpon-cornerstone (F)']:`Ogerpon-Cornerstone (F) @ Cornerstone Mask  
+['ogerpon-cornerstone-mask']:`Ogerpon-Cornerstone (F) @ Cornerstone Mask  
 Ability: Sturdy  
 Tera Type: Rock  
 EVs: 252 Atk / 4 SpD / 252 Spe  
