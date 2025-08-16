@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=2.5, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=0.65, maximum-scale=2.5, user-scalable=yes">
     <title>宝可梦BP对战系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -146,9 +146,30 @@
                     <button class="control-btn" id="collaborate-btn">
                         <i class="fas fa-users"></i> 多人聊天
                     </button>      
+                   <button class="control-btn" id="info-btn">
+                   <i class="fas fa-info-circle"></i> 使用说明
+    </button>
                 </div>
             </div>
-            
+            <div class="pokemon-details info-modal" id="info-modal">
+    <span class="close-details" id="close-info-modal">&times;</span>
+    <div class="info-modal-content">
+        <strong>1.关于BP模拟器：</strong><br>
+        由bilibili创作者@韩枫有点帅，自学研发，配套pokemonshowdown网站使用，此网站开发的所有费用由作者个人承担，无盈利，如果你想要赞助作者，可以在bilibili关注他；<br><br>
+        <strong>2：关于玩法特色：</strong><br>
+        网站的核心玩法是，通过类似moba游戏的ban/pick选择，来组建自己的队伍，玩家将分为红蓝两个阵营，运用你们的对战智慧，选择自己最理想的队伍，然后展开对战；<br><br>
+        <strong>3：关于基本操作</strong><br>
+        （1）点击精灵：查看精灵种族、属性、特性等详情；<br>
+        （2）选择/禁用精灵：长按精灵，将其拖入红色方（蓝色方）面板，即视为选择，如果你拖动无效，请以精灵的【名称】为基准拖动，因为精灵的判定点不是立绘，而是名称；<br>
+        （3）BP顺序：根据精灵卡池顶部的文本播报进行，根据提示，进行相应回合的操作；目前的BP顺序是：红一选，蓝色后选先ban，红选红ban，蓝选蓝ban循环，双方各有6个自选位，3个禁用位；<br><br>
+        <strong>4：关于联机功能</strong><br>
+        （1）双人联机：目前网站并不支持在线匹配，你需要创建房间，然后点击网页顶部的【分享房间】，此时会自动复制房间网址，分享给你的朋友即可；<br>
+        （2）什么是创建房间：打开网站，即视为创建房间，如果要双人联机，一定要确保双方的房间码是一致的，因为刷新网站可能会导致房间更换，建议从分享的房间链接进入；<br>
+        （3）聊天/在线/更改个人信息：点击功能栏的【多人聊天】——此处进行聊天，以及查看当前房间在线用户——点击左上角齿轮修改【个人信息（用户名、头像、队伍）】<br>
+        （4）对战唤起：本网站依托于宝可梦平台网络游戏pokemonshowdown，局内支持唤起对战页面，操作为：点击用户的头像（实际上应该是点击对手的头像，此时会直接发起挑战）<br>
+        （5）无法唤起：特别注意，你需要将自己的用户名，修改至和pokemonshowdown用户名完全一致，同时，所以英文保持小写，这样才可以正确拉起挑战；<br>
+    </div>
+</div>
             <!-- 蓝队区域 -->
             <div class="team-section blue-team" id="blue-team-section">
                 <div class="team-title blue-title">蓝方自选</div>
