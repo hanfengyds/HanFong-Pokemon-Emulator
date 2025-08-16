@@ -1029,6 +1029,19 @@ setTimeout(() => {
                 this.elements.suggestionModal.classList.remove('show');
             }
         });
+        
+        // 使用说明弹窗逻辑
+    const infoBtn = document.getElementById('info-btn');
+    const infoModal = document.getElementById('info-modal');
+    const closeInfoModal = document.getElementById('close-info-modal');
+    if (infoBtn && infoModal && closeInfoModal) {
+        infoBtn.onclick = function() {
+            infoModal.style.display = 'block';
+        };
+        closeInfoModal.onclick = function() {
+            infoModal.style.display = 'none';
+        };
+    }
     }
 }
 
