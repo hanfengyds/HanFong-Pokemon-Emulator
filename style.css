@@ -71,14 +71,14 @@
 .red-team {
     background: url('ui/red-background.png');
     background-position: center;
-    background-size: 600px 112%;
+    background-size: 230% 112%;
     border: 3px solid #ff4d4d;
 }
 
 .blue-team {
     background: url('ui/blue-background.png');
     background-position: center;
-    background-size: 600px 112%;
+    background-size: 230%112%;
     border: 3px solid #4da6ff;
 } 
         
@@ -1191,3 +1191,61 @@
         text-align: center;
         padding: 10px;
     }
+
+/* 使用说明弹窗样式 */
+.info-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 480px;
+    max-width: 90vw;
+    height: 600px;
+    max-height: 90vh;
+    background: url('ui/xinxi.jpg') center center/cover no-repeat;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.info-modal-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    padding: 32px 24px 24px 24px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    line-height: 1.7;
+    font-size: 16px;
+    z-index: 1;
+}
+
+.info-modal strong {
+    color: #6dd1ff;
+}
+
+.info-modal br {
+    margin-bottom: 8px;
+    display: block;
+    content: "";
+}
+
+#close-info-modal {
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    font-size: 32px;
+    cursor: pointer;
+    color: #fff;
+    text-shadow: 0 0 8px #000;
+    z-index: 2;
+}
+
+#close-info-modal:hover {
+    color: #ff3333;
+}
