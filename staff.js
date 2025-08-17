@@ -54,14 +54,14 @@ Impish Nature
 - Toxic`,  
 
 hippowdon:`Hippowdon @ Leftovers  
-Ability: Sand Stream  
+Ability: Sand Force  
 Tera Type: Ground  
-EVs: 252 HP / 4 Atk / 252 SpD  
-Careful Nature  
+EVs: 204 HP / 12 Atk / 204 Def / 88 SpD  
+Impish Nature  
 - Earthquake  
-- Yawn  
 - Slack Off  
-- Stealth Rock`,  
+- Roar  
+- Toxic`,  
 
 electivire:`Electivire @ Life Orb  
 Ability: Hadron Engine  
@@ -374,5 +374,6 @@ Hasty Nature
 - Close Combat  
 - Knock Off`,
 };
+
 
 
