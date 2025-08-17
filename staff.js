@@ -296,8 +296,7 @@ Ability: Tera Shell
 Tera Type: Stellar  
 EVs: 252 SpA / 4 SpD / 252 Spe  
 Timid Nature  
-IVs: 15 Atk  
-- Calm Mind  
+- Rapid Spin  
 - Tera Starstorm  
 - Flamethrower  
 - Earth Power`,  
@@ -375,4 +374,5 @@ Hasty Nature
 - Close Combat  
 - Knock Off`,
 };
+
 
