@@ -186,15 +186,15 @@ Jolly Nature
 - Swords Dance  
 - Close Combat`,  
 
-['iron-treads']:`Iron Treads @ Heavy-Duty Boots  
+['iron-treads']:`Iron Treads @ Booster Energy  
 Ability: Quark Drive  
 Tera Type: Ground  
-EVs: 252 SpA / 4 SpD / 252 Spe  
-Timid Nature  
-- Earth Power  
-- Steel Beam  
+EVs: 248 HP / 8 Atk / 252 Spe  
+Jolly Nature  
+- Earthquake  
 - Rapid Spin  
-- Stealth Rock`,  
+- Stealth Rock  
+- Volt Switch`,  
 
 gholdengo:`Gholdengo @ Choice Specs  
 Ability: Good as Gold  
@@ -375,3 +375,4 @@ Hasty Nature
 - Close Combat  
 - Knock Off`,
 };
+
