@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16强使用率排行榜</title>
+    <style>
+        /* 基础样式设置 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-image: url('ui/vs.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        table {
+            width: 45%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 18px;
+            font-weight: bold; 
+        }
+        th {
+            background-color: #3aaefb;
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f7fa;
+        }
+        /* 图片容器：固定方形尺寸 */
+        .img-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .img-container img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.2s;
+        }
+        .img-container img:hover {
+            transform: scale(1.1);
+        }
+        /* 图片加载失败提示 */
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            font-style: italic;
+        }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .img-container {
+                width: 80px;
+                height: 80px;
+            }
+            th, td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+        }
+        .rank-1 { color: red; }
+        .rank-2 { color: rgba(255, 176, 30, 0.775); }
+        .rank-3 { color: rgb(6, 189, 15); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="toolbar">
+            <button onclick="window.location.href='index.html'">返回网页</button>
+            <button id="capture-btn">下载表格</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>排名</th>
+                    <th>宝可梦</th>
+                    <th>形象</th>
+                    <th>使用次数</th>
+                    <th>使用率</th>
+                </tr>
+            </thead>
+            <tbody id="pokemon-table-body">
+                <!-- 表格内容由JS动态生成 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 宝可梦数据（包含编号，用于匹配本地图片）
+       const pokemonData = [
+    { rank: 1, name: "太乐巴戈斯", number: 10276, count: 26, rate: "56.5%" },
+    { rank: 2, name: "帝牙卢卡", number: 483, count: 23, rate: "50.0%" },
+    { rank: 3, name: "赛富豪", number: 1000, count: 18, rate: "39.1%" },
+    { rank: 4, name: "土地云", number: 10021, count: 18, rate: "39.1%" },
+    { rank: 5, name: "电击魔兽", number: 466, count: 15, rate: "32.6%" },
+    { rank: 6, name: "铁武者", number: 1006, count: 13, rate: "28.3%" },
+    { rank: 7, name: "摔跤鹰人", number: 701, count: 12, rate: "26.1%" },
+    { rank: 8, name: "玛机雅娜", number: 801, count: 12, rate: "26.1%" },
+    { rank: 9, name: "猛雷鼓", number: 1021, count: 12, rate: "26.1%" },
+    { rank: 10, name: "铁磐岩", number: 1022, count: 12, rate: "26.1%" },
+    { rank: 11, name: "M妙蛙花", number: 10033, count: 11, rate: "23.9%" },
+    { rank: 12, name: "晶光花", number: 970, count: 10, rate: "21.7%" },
+    { rank: 13, name: "烈咬陆鲨", number: 445, count: 9, rate: "19.6%" },
+    { rank: 14, name: "鸭嘴炎兽", number: 467, count: 9, rate: "19.6%" },
+    { rank: 15, name: "超坏星", number: 748, count: 9, rate: "19.6%" },
+    { rank: 16, name: "苍炎刃鬼", number: 937, count: 9, rate: "19.6%" },
+    { rank: 17, name: "拉帝欧斯", number: 381, count: 8, rate: "17.4%" },
+    { rank: 18, name: "席多蓝恩", number: 485, count: 8, rate: "17.4%" },
+    { rank: 19, name: "M阿勃梭鲁", number: 10057, count: 7, rate: "15.2%" },
+    { rank: 20, name: "岩厄诡椪", number: 10275, count: 7, rate: "15.2%" },
+    { rank: 21, name: "尼多王", number: 34, count: 6, rate: "13.0%" },
+    { rank: 22, name: "暴鲤龙", number: 130, count: 6, rate: "13.0%" },
+    { rank: 23, name: "纸御剑", number: 798, count: 6, rate: "13.0%" },
+    { rank: 24, name: "铁辙迹", number: 990, count: 6, rate: "13.0%" },
+    { rank: 25, name: "闪电鸟", number: 145, count: 4, rate: "8.7%" },
+    { rank: 26, name: "火焰鸟", number: 146, count: 4, rate: "8.7%" },
+    { rank: 27, name: "河马兽", number: 450, count: 4, rate: "8.7%" },
+    { rank: 28, name: "具甲武者", number: 768, count: 5, rate: "10.9%" },
+    { rank: 29, name: "古鼎鹿", number: 1003, count: 5, rate: "10.9%" },
+    { rank: 30, name: "洗衣机", number: 10009, count: 5, rate: "10.9%" },
+    { rank: 31, name: "M黑鲁加", number: 10048, count: 5, rate: "10.9%" },
+    { rank: 32, name: "铁火辉夜", number: 797, count: 3, rate: "6.5%" },
+    { rank: 33, name: "密集大蛇", number: 1019, count: 3, rate: "6.5%" },
+    { rank: 34, name: "皮可西", number: 36, count: 2, rate: "4.3%" },
+    { rank: 35, name: "裙儿小姐", number: 10237, count: 2, rate: "4.3%" },
+    { rank: 36, name: "勾帕路翁", number: 638, count: 1, rate: "2.2%" },
+    { rank: 37, name: "捷拉奥拉", number: 807, count: 1, rate: "2.2%" }
+];
+
+        // 获取表格主体元素
+        const tableBody = document.getElementById("pokemon-table-body");
+
+        // 获取本地图片路径
+        function getLocalImagePath(number, form = "") {
+            if (!number) return "";
+            
+            // 根据宝可梦编号和形态构建本地图片路径
+            // 假设特殊形态图片命名格式为：编号-form.jpg (例如：3-mega.jpg)
+            let fileName = number;
+            if (form) {
+                fileName += `-${form}`;
+            }
+            
+            // 图片文件格式，根据你的实际情况修改（.jpg, .png等）
+            return `official-artwork/${fileName}.png`;
+        }
+
+        // 动态生成表格内容
+        function renderPokemonTable() {
+            for (const pokemon of pokemonData) {
+                // 创建表格行
+                const row = document.createElement("tr");
+
+                // 根据排名添加对应类名
+                if (pokemon.rank === 1) {
+                    row.classList.add('rank-1');
+                } else if (pokemon.rank === 2) {
+                    row.classList.add('rank-2');
+                } else if (pokemon.rank === 3) {
+                    row.classList.add('rank-3');
+                }
+
+                // 排名单元格
+                const rankCell = document.createElement("td");
+                rankCell.textContent = pokemon.rank;
+                row.appendChild(rankCell);
+
+                // 宝可梦名称单元格
+                const nameCell = document.createElement("td");
+                nameCell.textContent = pokemon.name;
+                row.appendChild(nameCell);
+
+                // 图片单元格
+                const imgCell = document.createElement("td");
+                const imgContainer = document.createElement("div");
+                imgContainer.className = "img-container";
+                
+                if (pokemon.number) {
+                    // 构建图片路径
+                    const imgPath = getLocalImagePath(pokemon.number, pokemon.form);
+                    
+                    // 创建图片元素
+                    const img = document.createElement("img");
+                    img.src = imgPath;
+                    img.alt = pokemon.name;
+                    
+                    // 图片加载失败处理
+                    img.onerror = function() {
+                        imgContainer.innerHTML = `<div class="error-message">图片未找到</div>`;
+                    };
+                    
+                    imgContainer.appendChild(img);
+                } else {
+                    // 无编号数据的情况
+                    imgContainer.innerHTML = `<div class="error-message">无数据</div>`;
+                }
+                
+                imgCell.appendChild(imgContainer);
+                row.appendChild(imgCell);
+
+                // 使用次数单元格
+                const countCell = document.createElement("td");
+                countCell.textContent = pokemon.count;
+                row.appendChild(countCell);
+
+                // 使用率单元格
+                const rateCell = document.createElement("td");
+                rateCell.textContent = pokemon.rate;
+                row.appendChild(rateCell);
+
+                // 添加到表格
+                tableBody.appendChild(row);
+            }
+        }
+
+        // 页面加载完成后渲染表格
+        window.onload = renderPokemonTable;
+
+        // 添加截图下载逻辑
+        document.getElementById('capture-btn').addEventListener('click', function() {
+            const table = document.querySelector('table');
+            html2canvas(table).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'pokemon-table.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
+</body>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+    .toolbar {
+        margin: 0 auto 0px; /* 使 toolbar 水平居中，并添加底部外边距 */
+        text-align: center; 
+        padding-bottom: 10px; 
+        max-width: fit-content; /* 确保 toolbar 宽度适应内容 */
+        position: fixed; /* 固定定位 */
+        top: 0; /* 固定在顶部 */
+        left: 0; /* 从左侧开始 */
+        right: 0; /* 延伸到右侧 */
+        z-index: 1000; /* 设置层级，避免被遮挡 */
+        padding: 15px; /* 添加内边距 */
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 添加阴影 */
+    }
+    .toolbar button {
+        padding: 12px 24px; /* 增大内边距 */
+        font-size: 20px; /* 增大字体 */
+        margin: 0 10px; /* 添加按钮间距 */
+    }
+    /* 调整容器顶部内边距，避免内容被遮挡 */
+    .container {
+        padding-top: 20px; 
+    }
+</style>
