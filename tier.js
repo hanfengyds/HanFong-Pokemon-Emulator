@@ -81,4 +81,17 @@ const tierPokemons = {
 
     ],
 
+    第四赛段:[ //37
+      'flygon','scizor-mega','starmie','fezandipiti',,'ogerpon-cornerstone-mask',//沙漠蜻蜓，m巨钳螳螂，宝石海星，毒鸡，岩椪
+      'heracross-mega','rotom-mow','skarmory','latias','meowscarada',//m赫拉，洗衣机，盔甲鸟，拉帝亚斯，假面猫
+      'dracozolt','cobalion','lokix','thundurus-therian',//雷鸟龙，勾帕路翁，烈腿蝗，雷电云
+      'archaludon','dragonite','rillaboom','blastoise',//铝钢桥龙，快龙，轰擂金刚猩，水箭龟
+      'kleavor','okidogi','','moltres','excadrill',//，够赞狗，火焰鸟，龙头地鼠
+      'tauros','slowbro','mienshao','palossand','cofagrigus',//肯泰罗，呆壳兽，师傅鼬，沙堡，死神棺
+      'starmie','archeops','wo-chien','audino-mega','quagsire',//宝石海星，始祖大鸟，古简蜗，m差不多，沼王
+      'cradily','kingdra','hydrapple','kyurem','articuno-galar'//摇篮百合，刺龙王，密集大蛇，酋雷姆，急冻鸟
+
+
+    ],
+
 };
