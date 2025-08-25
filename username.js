@@ -49,7 +49,7 @@ class UsernameManager {
 
                     <div class="avatar-selection">
                         <div class="current-avatar">
-                            <img id="selected-avatar" src="home/${this.avatar}" alt="当前头像">
+                            <img id="selected-avatar" src="avatar/${this.avatar}" alt="当前头像">
                         </div>
                         <div class="avatar-grid" id="avatar-grid"></div>
                     </div>
@@ -127,13 +127,13 @@ class UsernameManager {
         const avatarGrid = document.getElementById('avatar-grid');
         avatarGrid.innerHTML = ''; // 清空现有内容
 
-        // 直接使用带扩展名的完整文件名
-        const availableAvatars = ['0.1.png','0.2.png','0.3.png','0.4.png','0.5.png','0.6.png','0.7.png','0.8.png','0.9.png','0.10.png',
-             '0.11.png','0.12.png','0.13.png','0.14.png','0.15.png','0.16.png','0.17.png','0.8.png','0.19.png','0.20.png','0.png',
-              '0.21.png','0.22.png','0.23.png','0.24.png','0.25.png','0.26.png','0.27.png','0.28.png','0.29.png','0.30.png',
-             '143.png', '212.png', '306M.png','330.png','383P.png','382P.png',
-             '964HERO.png','328.png','77G.png',
-             '25Ca1.png','445.png','802.png','48.png','359M.png','231.png'];
+        // 支持中英文文件名，来源于 avatar 文件夹
+        const availableAvatars = [
+              '古鲁夏.png', '坂木.png', '大吾.png', '奇树.png', '娜姿.png', '小刚.png',
+            '小智.png', '小菊儿.png', '小遥.png', '小霞.png', '彩豆.png', '杜鹃.png',
+            '格拉吉欧.png', '水莲.png', '渡.png', '玛俐.png', '瑟琳娜.png', '竹兰.png',
+            '篝火.png', '索妮亚.png', '辛俐.png', '阿塞罗拉.png', '露璃娜.png',
+        ];
         
         // 创建滑动容器
         const avatarScroller = document.createElement('div');
@@ -147,12 +147,12 @@ class UsernameManager {
             }
             
             avatarItem.innerHTML = `
-                <img src="home/${filename}" alt="头像${filename}" title="头像${filename}">
+                <img src="avatar/${filename}" alt="头像${filename}" title="${filename}">
             `;
             
             avatarItem.addEventListener('click', () => {
                 this.avatar = filename;
-                document.getElementById('selected-avatar').src = `home/${filename}`;
+                document.getElementById('selected-avatar').src = `avatar/${filename}`;
                 
                 // 更新所有头像的选中状态
                 document.querySelectorAll('.avatar-item').forEach(item => {
@@ -481,7 +481,7 @@ class UsernameManager {
         userInfo.className = `user-team-info ${this.team}`;
         userInfo.dataset.userId = this.multiplayer.userId; // 标记为自己的信息
         userInfo.innerHTML = `
-            <img src="home/${this.avatar}" alt="${this.username}" class="user-team-avatar">
+            <img src="avatar/${this.avatar}" alt="${this.username}" class="user-team-avatar">
             <div class="user-team-name">${this.username}</div>
         `;
         
@@ -590,7 +590,7 @@ class UsernameManager {
                 const userItem = document.createElement('div');
                 userItem.className = 'user-item';
                 userItem.innerHTML = `
-                    <img src="home/${user.avatar || '1.png'}" alt="${user.name}" class="user-avatar">
+                    <img src="avatar/${user.avatar || '1.png'}" alt="${user.name}" class="user-avatar">
                     <div class="user-name">${user.name}</div>
                 `;
                 userListContent.appendChild(userItem);
