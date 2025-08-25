@@ -709,39 +709,107 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 20px;
+    font-size: 1.5rem;
     background: none;
     border: none;
     cursor: pointer;
+    color: #555;
 }
 
 .team-container {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: center; /* 改为垂直居中 */
     gap: 20px;
+    justify-content: center; /* 水平居中 */
 }
 
-.vs {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 5px;
+.team-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 45%; /* 控制每列宽度 */
 }
 
-.red-team, .blue-team {
+/* 红蓝队伍区域样式 */
+.export-red-team, .export-blue-team {
     display: flex;
     gap: 15px;
-    flex-wrap: wrap;
     justify-content: center;
-    max-width: 800px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* 禁用宝可梦区域样式 */
+.export-red-bans, .export-blue-bans {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+}
+
+/* 红色禁用区域靠左 */
+.export-red-bans {
+    justify-content: flex-start;
+}
+
+/* 蓝色禁用区域靠右 */
+.export-blue-bans {
+    justify-content: flex-end;
+}
+
+.bans-title {
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--ban-color);
+}
+
+/* 红色禁用区域标题靠左 */
+.export-red-bans .bans-title {
+    text-align: left;
+    color: #e74c3c;
+}
+
+/* 蓝色禁用区域标题靠右 */
+.export-blue-bans .bans-title {
+    text-align: right;
+    color: #3498db;
 }
 
 .simple-pokemon {
     text-align: center;
     flex: 0 0 auto;
+    width: 80px; /* 设置固定宽度 */
 }
 
 .simple-pokemon img {
     width: 80px; height: 80px; object-fit: contain;
+}
+
+.simple-pokemon div {
+    font-size: 0.85rem; /* 适当减小字体大小 */
+    width: 100%; /* 继承父元素宽度 */
+    white-space: nowrap; /* 禁止文本换行 */
+    overflow: hidden; /* 隐藏溢出内容 */
+    text-overflow: ellipsis; /* 溢出文本显示省略号 */
+}
+
+
+
+/* 添加禁用宝可梦的缩小样式 */
+.simple-pokemon.small {
+    transform: scale(0.85); /* 整体缩小70% */
+    transform-origin: center top;
+}
+
+.simple-pokemon.small img {
+    width: 80px; height: 80px; /* 图片缩小 */
+}
+
+.simple-pokemon.small div {
+    font-size: 0.85rem; /* 文字缩小 */
 }
 
 
@@ -1248,4 +1316,80 @@
 
 #close-info-modal:hover {
     color: #ff3333;
+}
+
+.export-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.team-avatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+}
+
+.team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.export-team-pokemons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.export-team.red .team-avatar {
+    box-shadow: 0 0 0 2px #e74c3c;
+}
+
+.export-team.blue .team-avatar {
+    box-shadow: 0 0 0 2px #3498db;
+}
+
+.team-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.red-header {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid #e74c3c;
+}
+
+.blue-header {
+    background-color: rgba(52, 152, 219, 0.1);
+    border: 1px solid #3498db;
+}
+
+.team-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.team-username {
+    font-weight: bold;
+}
+
+.red-header .team-username {
+    color: #e74c3c;
+}
+
+.blue-header .team-username {
+    color: #3498db;
 }
