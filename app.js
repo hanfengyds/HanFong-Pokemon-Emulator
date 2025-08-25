@@ -892,24 +892,46 @@ transformPokemonData(apiData) {
     <div class="export-window-content">
         <button class="close-btn">&times;</button>
         <div class="team-container">
-            <div class="export-red-team">${this.bpManager.redTeam.map(p => `
-                <div class="simple-pokemon">
+    <div class="team-column">
+        <div class="export-red-bans">
+            <div class="bans-title">红队禁用</div>
+            ${this.bpManager.bannedPokemon.filter((_, index) => index % 2 === 0).map(p => `
+                <div class="simple-pokemon small">
                     <img src="${p.image}" alt="${p.name}">
                     <div>${p.name}</div>
                 </div>
-            `).join('')}</div>
-            <div class="vs-controls">
-                <button class="copy-btn red">导出</button>
-                <div class="vs">VS</div>
-                <button class="copy-btn blue">导出</button>
-            </div>
-            <div class="export-blue-team">${this.bpManager.blueTeam.map(p => `
-                <div class="simple-pokemon">
-                    <img src="${p.image}" alt="${p.name}">
-                    <div>${p.name}</div>
-                </div>
-            `).join('')}</div>
+            `).join('')}
         </div>
+        <div class="export-red-team">${this.bpManager.redTeam.map(p => `
+            <div class="simple-pokemon">
+                <img src="${p.image}" alt="${p.name}">
+                <div>${p.name}</div>
+            </div>
+        `).join('')}</div>
+    </div>
+    <div class="vs-controls">
+        <button class="copy-btn red">导出</button>
+        <div class="vs">VS</div>
+        <button class="copy-btn blue">导出</button>
+    </div>
+    <div class="team-column">
+        <div class="export-blue-bans">
+            <div class="bans-title">蓝队禁用</div>
+            ${this.bpManager.bannedPokemon.filter((_, index) => index % 2 === 1).map(p => `
+                <div class="simple-pokemon small">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div>${p.name}</div>
+                </div>
+            `).join('')}
+        </div>
+        <div class="export-blue-team">${this.bpManager.blueTeam.map(p => `
+            <div class="simple-pokemon">
+                <img src="${p.image}" alt="${p.name}">
+                <div>${p.name}</div>
+            </div>
+        `).join('')}</div>
+    </div>
+</div>
     </div>
 `;
             // 新增：让导出队伍横向排列
